@@ -1,0 +1,36 @@
+{
+  "name": "piece",
+  "description": "Piece HTML5 Framework for Mobile",
+  "version": "0.0.1",
+  "author": {
+    "name": "Justin Yip",
+    "email": "justin.yip@foxmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yezhiming/piece.git"
+  },
+  "bin": {
+    "piece": "./bin/cli.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "mkdirp": "~0.3.4",
+    "commander": "0.6.1",
+    "ncp": "0.4.2",
+    "underscore": "*",
+    "rimraf": "*",
+    "adm-zip": "0.4.3",
+    "request": "*",
+    "async": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-contrib-handlebars": "~0.5.10",
+    "grunt-contrib-stylus": "~0.6.0"
+  }
+}
