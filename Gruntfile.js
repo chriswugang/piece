@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
+		//compile stylus to css
 		stylus: {
 			compile: {
 				files: {
@@ -9,9 +10,9 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		//just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
 		bower: {
 			install: {
-				//just run 'grunt bower:install' and you'll see files from your Bower packages in lib directory
 				options: {
 					targetDir: './vendor',
 					layout: 'byComponent',
@@ -44,5 +45,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('default', ["stylus", "bower", "clean", 'copy']);
+	grunt.registerTask('default', ["clean", "stylus", "bower", 'copy']);
 };
