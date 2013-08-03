@@ -13,6 +13,9 @@
   "bin": {
     "piece": "./bin/cli.js"
   },
+  "bugs": {
+    "url": "https://github.com/yezhiming/piece/issues"
+  },
   "dependencies": {
     "express": "*",
     "mkdirp": "~0.3.4",
@@ -31,6 +34,7 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-handlebars": "~0.5.10",
-    "grunt-contrib-stylus": "~0.6.0"
+    "grunt-contrib-stylus": "~0.6.0",
+    "grunt-bower-task": "*"
   }
 }
