@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 		stylus: {
 			compile: {
 				files: {
-					'dest/css/piece.css': 'src/stylus/piece.styl'
+					'dist/css/piece.css': 'src/stylus/piece.styl'
 				}
 			}
 		},
@@ -22,11 +22,27 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		//copy the src/images and vendor to dist
+		copy: {
+			main: {
+				files: [{
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: ['src/images/**'],
+					dest: 'dist/images/'
+				}]
+			}
+		},
+		//claen the dist folder before copy & compile files
+		clean: ["dist/"]
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-stylus');
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-bower-task');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('default', ['stylus', 'bower']);
+	grunt.registerTask('default', ["stylus", "bower", "clean", 'copy']);
 };
