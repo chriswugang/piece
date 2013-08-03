@@ -13,7 +13,7 @@ results
 
 npm-debug.log
 /node_modules
-/vendor
+/src/vendor
 src/.DS_Store
 
 .DS_Store

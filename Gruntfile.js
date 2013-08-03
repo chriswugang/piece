@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 		bower: {
 			install: {
 				options: {
-					targetDir: './vendor',
+					targetDir: 'src/vendor',
 					layout: 'byComponent',
 					install: true,
 					verbose: true,
