@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
-		//claen the dist folder before copy & compile files
+		//claen the dist before copy & compile files
 		clean: ["dist/"]
 	});
 
