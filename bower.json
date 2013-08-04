@@ -2,7 +2,7 @@
   "name": "piece-bower",
   "version": "0.0.1",
   "dependencies": {
-    "almond": "*",
+    "requirejs": "*",
     "backbone": "*",
     "underscore": "*",
     "zepto": "*",
@@ -14,8 +14,8 @@
     "ratchet": "*"
   },
   "exportsOverride": {
-    "almond": {
-      "js": "almond.js"
+    "requirejs": {
+      "js": "require.js"
     },
     "backbone": {
       "js": "backbone.js"
