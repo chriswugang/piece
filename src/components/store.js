@@ -1,10 +1,10 @@
 /**
  * HTML5本地存储模块，DB实例
  */
-define(['zepto'], function($){
+define([], function() {
 
-	var Store = function(){
-		
+	var Store = function() {
+
 	}
 
 	Store.saveObject = function(key, object) {
@@ -12,7 +12,7 @@ define(['zepto'], function($){
 	}
 
 	Store.loadObject = function(key) {
-		var objectString =  window.localStorage[key];
+		var objectString = window.localStorage[key];
 		return objectString == null ? null : JSON.parse(objectString);
 	}
 

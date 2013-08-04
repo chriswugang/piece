@@ -36,7 +36,18 @@ module.exports = function(grunt) {
 			}
 		},
 		//claen the dist before copy & compile files
-		clean: ["dist/"]
+		clean: ["dist/"],
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: ".",
+					mainConfigFile: "config.js",
+					name: "src/core/piece.js",
+					out: "dist/js/piece.js",
+					wrap: false
+				}
+			}
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-stylus');
@@ -45,5 +56,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 
-	grunt.registerTask('default', ["clean", "stylus", "bower", 'copy']);
+	grunt.registerTask('default', ["clean", "stylus", "bower", 'copy', 'requirejs']);
+	// grunt.registerTask('default', ["requirejs"]);
+
 };
