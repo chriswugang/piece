@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>变色龙</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+
+  <meta name="launcher"
+        defaultModule="com.foss.bb"
+        defaultView="listView" 
+        loadMode="module" 
+        enablePad="true"
+        hideAddressBar="true" 
+        preventTouchMove="false">
+
+  <meta http-equiv="X-Frame-Options" content="ALLOW-FROM">
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <!-- <link href="init.css" rel="stylesheet"/>
+  -->
+  <script type="text/javascript">
+      var require = {
+          urlArgs: "bust=" +  (new Date()).getTime()
+      };
+  </script>
+
+  <script type="text/javascript">
+ // var isiPad = navigator.userAgent.match(/iPad/i) != null;
+//  var isiPhone = navigator.userAgent.match(/iPhone/i) != null;
+ // var applejs = document.createElement('meta');
+ // applejs.setAttribute('name', 'apple-itunes-app');
+
+ // if (isiPhone) {
+ //  applejs.setAttribute('content', 'app-id=460310138');
+   // document.head.appendChild(applejs);
+  //};
+  //if (isiPad) {
+   // applejs.setAttribute('content', 'app-id=590044309');
+   // document.head.appendChild(applejs);
+  //};
+</script>
+
+  <script  type="text/javascript" src="../src/vendor/almond/js/almond.js"></script>
+  <script  type="text/javascript" src="../src/core/launcher.js"></script>
+
+  <!-- // <script type="text/javascript" src="http://10.108.1.89:8090/target/target-script-min.js#cube"></script>
+-->
+<style type="text/css">
+       /**
+       * Example of an initial loading indicator.
+       * It is recommended to keep this as minimal as possible to provide instant feedback
+       * while other resources are still being loaded for the first time
+       */
+      html, body {
+          background-color: #1985D0
+      }
+
+      #appLoadingIndicator {
+          position: absolute;
+          top: 50%;
+          margin-top: -15px;
+          text-align: center;
+          width: 100%;
+          height: 30px;
+          -webkit-animation-name: appLoadingIndicator;
+          -webkit-animation-duration: 0.5s;
+          -webkit-animation-iteration-count: infinite;
+          -webkit-animation-direction: linear;
+      }
+
+      #appLoadingIndicator > * {
+          background-color: #FFFFFF;
+          display: inline-block;
+          height: 30px;
+          -webkit-border-radius: 15px;
+          margin: 0 5px;
+          width: 30px;
+          opacity: 0.8;
+      }
+
+      @-webkit-keyframes appLoadingIndicator{
+          0% {
+              opacity: 0.8
+          }
+          50% {
+              opacity: 0
+          }
+          100% {
+              opacity: 0.8
+          }
+      }
+  </style>
+
+</head>
+<body>
+<!-- add loading screen here, using html5 animation -->
+<div id="appLoadingIndicator">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+</body>
+</html>
