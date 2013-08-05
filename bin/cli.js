@@ -7,6 +7,7 @@ var program 	= require('commander'),
 
 var ServerProgram	= require('./server');
 var ChromeProgram	= require('./chrome');
+var ScafflodProgram	= require('./scaffold');
 
 console.log('piece.js v' + version);
 console.log('current path: %s', path.resolve('.'));
@@ -15,5 +16,6 @@ console.log('sdk path: %s', path.resolve(__dirname));
 //加载模块
 ServerProgram(program);
 ChromeProgram(program);
+ScafflodProgram(program);
 
 program.parse(process.argv);
