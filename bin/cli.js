@@ -5,13 +5,23 @@ var program 	= require('commander'),
 	pkg       	= require('../package.json'),
   	version   	= pkg.version;
 
+var red, blue, reset;
+red = '\033[31m';
+blue = '\033[34m';
+reset = '\033[0m';
+
 var ServerProgram	= require('./server');
 var ChromeProgram	= require('./chrome');
 var ScafflodProgram	= require('./scaffold');
 
-console.log('piece.js v' + version);
-console.log('current path: %s', path.resolve('.'));
-console.log('sdk path: %s', path.resolve(__dirname));
+program
+  	.command('info')
+  	.description('print framework info')
+  	.action(function(){
+  		console.log(blue + 'piece.js v' + version + reset);
+		console.log(blue + 'current path: %s' + reset, path.resolve('.'));
+		console.log(blue + '    sdk path: %s' + reset, path.resolve(__dirname));
+  	});
 
 //加载模块
 ServerProgram(program);
