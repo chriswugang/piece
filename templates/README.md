@@ -1,0 +1,1 @@
+project file templates live in the folder ^_^
