@@ -3,6 +3,11 @@ var mkdirp      = require('mkdirp'),
 	fs			= require('fs'),
 	ncp         = require('ncp').ncp;
 
+var red, blue, reset;
+red = '\033[31m';
+blue = '\033[34m';
+reset = '\033[0m';
+
 module.exports = function(program){
 	
 	program
@@ -20,8 +25,8 @@ function createProject(name) {
 
 	var app_fullpath = path.resolve('.', name);
 
-	if(fs.existsSync(path)){
-		console.log('folder not empty.');
+	if(fs.existsSync(app_fullpath)){
+		console.log(red + 'folder not empty.' + reset);
 		return;
 	}
 	//create project folder
