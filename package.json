@@ -16,13 +16,29 @@
   "bugs": {
     "url": "https://github.com/yezhiming/piece/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "handlebars": "*",
+    "express": "*",
+    "mkdirp": "~0.3.4",
+    "commander": "0.6.1",
+    "ncp": "0.4.2",
+    "underscore": "*",
+    "rimraf": "*",
+    "adm-zip": "0.4.3",
+    "request": "*",
+    "async": "*"
+  },
   "devDependencies": {
+
     "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-jshint": "~0.6.0",
+
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-stylus": "~0.7.0",
-    "grunt-bower-task": "~0.2.3",
-    "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0"
+    "grunt-contrib-handlebars": "~0.5.10",
+    "grunt-bower-task": "~0.2.3"
   }
 }
