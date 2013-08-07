@@ -1,6 +1,4 @@
-//init require js
 require.config({
-	baseUrl: '.',
 	paths: {
 		//plugin
 		text: 'src/vendor/requirejs-text/js/text',
@@ -10,6 +8,8 @@ require.config({
 		zepto: 'src/vendor/zepto/js/zepto',
 		underscore: 'src/vendor/underscore/js/underscore',
 		backbone: 'src/vendor/backbone/js/backbone',
+		fastclick: 'src/vendor/fastclick/js/fastclick',
+
 		//path
 		vendor: 'src/vendor',
 		core: 'src/core'
@@ -24,6 +24,9 @@ require.config({
 		},
 		underscore: {
 			exports: '_'
+		},
+		fastclick: {
+			exports: 'FastClick'
 		}
 	}
 });

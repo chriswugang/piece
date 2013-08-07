@@ -39,6 +39,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-stylus": "~0.7.0",
     "grunt-contrib-handlebars": "~0.5.10",
-    "grunt-bower-task": "~0.2.3"
+    "grunt-bower-task": "~0.2.3",
+    "grunt-contrib-concat":"~0.3.0"
   }
 }

@@ -35,6 +35,7 @@ require.config({
 		zepto: 'src/vendor/zepto/js/zepto',
 		underscore: 'src/vendor/underscore/js/underscore',
 		backbone: 'src/vendor/backbone/js/backbone',
+		fastclick: 'src/vendor/fastclick/js/fastclick',
 
 		//path
 		vendor: 'src/vendor',
@@ -50,6 +51,9 @@ require.config({
 		},
 		underscore: {
 			exports: '_'
+		},
+		fastclick: {
+			exports: 'FastClick'
 		}
 	}
 });
@@ -64,9 +68,10 @@ requirejs.config({
 	}
 });
 (function() {
-	require(['zepto', "underscore", "backbone", "text", "i18n", "core/app"],
-		function($, _, Backbone, text, i18n, App) {
+	require(['zepto', "underscore", "backbone", "fastclick", "text", "i18n", "core/app"],
+		function($, _, Backbone, FastClick, text, i18n, App) {
 			pieceConfig = _.extend(defaultConfig, pieceConfig);
+			FastClick.attach(document.body);
 			App.initialize();
 		});
 })();

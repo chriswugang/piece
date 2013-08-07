@@ -47,6 +47,15 @@ module.exports = function(grunt) {
 					wrap: false
 				}
 			}
+		},
+		concat: {
+			options: {
+				separator: ';',
+			},
+			dist: {
+				src: ['src/vendor/requirejs/js/require.js', 'dist/js/piece.js'],
+				dest: 'dist/js/piece.js',
+			},
 		}
 	});
 
@@ -55,8 +64,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-bower-task');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-	grunt.registerTask('default', ["clean", "stylus", "bower", 'copy', 'requirejs']);
+	grunt.registerTask('default', ["clean", "stylus", "bower", 'copy', 'requirejs', 'concat']);
 	// grunt.registerTask('default', ["requirejs"]);
 
 };

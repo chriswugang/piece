@@ -5,6 +5,7 @@
     "requirejs": "*",
     "backbone": "*",
     "underscore": "*",
+    "fastclick": "*",
     "zepto": "*",
     "iscroll": "*",
     "requirejs-text": "*",
@@ -22,6 +23,9 @@
     },
     "underscore": {
       "js": "underscore.js"
+    },
+    "fastclick": {
+      "js": "lib/fastclick.js"
     },
     "zepto": {
       "js": "zepto.js"
