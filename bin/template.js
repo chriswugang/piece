@@ -1,6 +1,8 @@
-var Handlebars = require('handlebars');
+var Handlebars 	= require('handlebars'),
+	path 		= require('path'),
+	fs 			= require('fs');
 
-exports = function(src, dest, data){
+module.exports = function(src, dest, data){
 	var filePath = path.resolve(__dirname, '..', 'templates', src);
 	fs.readFile(filePath, {encoding: 'utf-8'}, function(err, fileData) {
     	if (err) throw err;

@@ -19,8 +19,8 @@ program
   	.description('print framework info')
   	.action(function(){
   		console.log(blue + 'piece.js v' + version + reset);
-		console.log(blue + 'current path: %s' + reset, path.resolve('.'));
-		console.log(blue + '    sdk path: %s' + reset, path.resolve(__dirname));
+		  console.log(blue + 'current path: %s' + reset, path.resolve('.'));
+		  console.log(blue + '    sdk path: %s' + reset, path.resolve(__dirname));
   	});
 
 //加载模块

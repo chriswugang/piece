@@ -1,7 +1,8 @@
 var mkdirp      = require('mkdirp'),
 	path		= require('path'),
 	fs			= require('fs'),
-	ncp         = require('ncp').ncp;
+	ncp         = require('ncp').ncp,
+	template	= require('./template');
 
 var red, blue, reset;
 red = '\033[31m';
@@ -19,6 +20,11 @@ module.exports = function(program){
 	.command('module <name>')
 	.description('create module')
 	.action(createModule);
+
+	program
+	.command('view <module> <name>')
+	.description('create view')
+	.action(createView);
 };
 
 function createProject(name) {
@@ -41,8 +47,13 @@ function createProject(name) {
 
 function createModule(name) {
 	mkdir(path.resolve('.', name), function() {
-		//todo
+		template('portalview.html', path.resolve('.', name, 'index.html'), {module: name, view: 'index'});
+		template('portalview.js', path.resolve('.', name, 'index.js'), {module: name, view: 'index'});
 	});
+}
+
+function createView (module, view) {
+	// body...
 }
 
 /**
