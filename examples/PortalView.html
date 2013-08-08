@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>变色龙</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+
+  <meta http-equiv="X-Frame-Options" content="ALLOW-FROM">
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <link href="../dist/css/cube.css" rel="stylesheet"/>
+
+  <script type="text/javascript">
+      var require = {
+          urlArgs: "bust=" +  (new Date()).getTime()
+      };
+
+      var pieceConfig ={
+          loadFrom:"module",
+          defaultModule:"examples",
+          defaultView:"PortalView" 
+      };
+  </script>
+
+  <script type="text/javascript" src="../dist/js/piece.js"></script>
+
+</head>
+<body>
+
+  <style type="text/css" media="all">
+
+.flightStatus-item {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+</style>
+
+  <script id="flightStatusTemplate" type="text/x-jquery-tmpl">
+  <div class="flightStatus-item">
+  <%
+    var colorForDelayTime = function(delayTime){
+      if (delayTime > 240) {
+        return '#FF0000';
+      } else if(delayTime >= 120){
+        return '#B88A00';
+      } else if(delayTime >= 30) {
+        return '#FFC000';
+      } else {
+        return '#000000';
+      }
+    }
+    var flightstatusMap = {
+      '已起飞' : '#008000',
+      '已降落' : '#B88A00',
+      '未起飞' : '#478AC9'
+    }
+  %>
+  <span style="color:<%= colorForDelayTime(delayTime) %>" ><%= alnCd %><%= flightNo %></span>
+  
+  &nbsp;&nbsp;<%=tailNo%>/<%=planeType%>&nbsp;
+  <br>
+  <span style="font-size:0.8em;">&nbsp;&nbsp;&nbsp;<%=deportCN%>&nbsp;&nbsp;<%=loadPlanePort%>/<%=stopAddressfrom%>&nbsp;&nbsp;
+  <%=schDepTimeAll%>&nbsp;&nbsp;
+
+  <% if(depdelaytime > 0) { %>
+    <span style="color:red">\+<%=depdelaytime%></span></span>
+  <% } else if(depdelaytime < 0) { %>
+    <span style="color:green"><%=depdelaytime%></span></span>
+  <% } %>
+  <div style="float:right;">
+    <span data-name="fltstatusFlag" style="height:15px;width:10px;font-size:15px;color:<%= flightstatusMap[fltStatusFlag] %>">&nbsp;<%=fltStatusFlag%></span>
+  </div>
+  <br>
+  <span style="font-size:0.8em;">&nbsp;&nbsp;&nbsp;<%= arportCN %>&nbsp;&nbsp;<%=stopAddressto%>&nbsp;&nbsp;
+  <%=schDesTimeAll%>&nbsp;&nbsp;
+  <% if(desdelaytime > 0) { %>
+    <span style="color:red">\+<%=desdelaytime%></span></span>
+  <% } else if(depdelaytime < 0) { %>
+    <span style="color:green"><%=desdelaytime%></span></span>
+  <% } %></div>
+</script>
+
+  <header class="bar-title">
+    <a id="refresh" class="button">返回</a>
+    <h1 class="title">航班动态</h1>
+    <a id="querymore" class="button">更多查询</a>
+  </header>
+
+  <nav class="bar-standard bar-header-secondary">
+    <ul id="io" class="segmented-controller">
+      <li class="active" data-value="out">
+        <a href="#">出港</a>
+      </li>
+      <li data-value="in">
+        <a href="#">进港</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <list id="flightstatus-list" 
+    url="fixtrue.json"
+    isPullDownRefresh="true"  
+    jsonRoot="pageModel.fltStatusList"
+    bundle="fs"
+    paging="true"
+    _itemTemplate="flightStatusTemplate"></list>
+  </div>
+
+</body>
+</html>

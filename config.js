@@ -9,10 +9,14 @@ require.config({
 		underscore: 'src/vendor/underscore/js/underscore',
 		backbone: 'src/vendor/backbone/js/backbone',
 		fastclick: 'src/vendor/fastclick/js/fastclick',
+		canvasloader: 'src/components/canvasloader',
+
+		gmu: 'src/components/gmu',
 
 		//path
 		vendor: 'src/vendor',
-		core: 'src/core'
+		core: 'src/core',
+		components: 'src/components'
 	},
 	shim: {
 		backbone: {
@@ -24,6 +28,9 @@ require.config({
 		},
 		underscore: {
 			exports: '_'
+		},
+		gmu: {
+			deps: ['zepto']
 		},
 		fastclick: {
 			exports: 'FastClick'
