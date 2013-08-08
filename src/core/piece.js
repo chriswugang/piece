@@ -4,7 +4,7 @@
 var Piece;
 //defaultConfig
 var defaultConfig = {
-	loadFrom: "root",
+	loadFrom: "module",
 	defaultModule: null,
 	defaultView: null,
 	loadMode: "view",
