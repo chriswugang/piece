@@ -32,11 +32,20 @@ module.exports = function(grunt) {
 					filter: 'isFile',
 					src: ['src/images/**'],
 					dest: 'dist/images/'
+				}, {
+					expand: true,
+					flatten: true,
+					filter: 'isFile',
+					src: ['temp/css/piece.css'],
+					dest: 'dist/css/'
 				}]
 			}
 		},
 		//claen the dist before copy & compile files
-		clean: ["dist/", ".sass-cache/"],
+		clean: {
+			dist: ["dist/"],
+			cache: [".sass-cache/", "temp/"]
+		},
 		requirejs: {
 			compile: {
 				options: {
@@ -61,7 +70,7 @@ module.exports = function(grunt) {
 			dist: { // Target
 				options: { // Target options
 					sassDir: 'src/sass',
-					cssDir: 'dist/css',
+					cssDir: 'temp/css',
 					environment: 'production'
 				}
 			}
@@ -78,7 +87,8 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-compass');
 
-	grunt.registerTask('default', ["clean", "compass", 'copy', 'requirejs', 'concat']);
+
+	grunt.registerTask('default', ["clean:dist", "compass", 'copy', 'requirejs', 'concat', "clean:cache"]);
 	// grunt.registerTask('default', ["clean", "compass", "bower", 'copy', 'requirejs', 'concat']);
 
 	// grunt.registerTask('default', ["requirejs"]);
