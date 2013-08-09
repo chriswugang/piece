@@ -53,7 +53,9 @@ function createModule(name) {
 }
 
 function createView (module, view) {
-	// body...
+
+	template('view.html', path.resolve('.', name, view + '.html'), {module: name, view: view});
+	template('view.js', path.resolve('.', name, view + '.js'), {module: name, view: view});
 }
 
 /**
