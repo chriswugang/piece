@@ -107,6 +107,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                             }
 
                             
+}
                             var pullDownRefreshHeight = 40;
                             pullDownRefreshEl = me.$('#PullDownRefresh')[0];
                             if (pullDownRefreshEl) {
@@ -130,7 +131,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                                     Cache.put("onScrollMove","false");
 
                                 }
-                            }
+                        
 
                         }
                     },
@@ -298,6 +299,10 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             }
             for (var i = 0; i < jsonArray.length; i++) {
                 var item = jsonArray[i];
+		
+ 		item.index = i;
+                item.mainDatas = jsonArray;
+		
                 // item.index = i;
                 var li = $("<li/>");
                 li.addClass('cube-list-item');

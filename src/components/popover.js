@@ -26,11 +26,21 @@ define(['zepto', 'backbone', 'gmu', 'components/fixed'], function($, Backbone, g
 				this.config = obj;
 			}
 			this.isMaskShow = false;
-			this.mask = $('<div class="popver-masker" style="display: none;width: 100%;min-height:1000px; z-index:100; position: absolute;"></div>');
+			var arrowSite = $(this.config.el).attr('arrowSite');
+			var maskStyle = $(this.config.el).attr('maskStyle');
+			this.mask = $('<div class="popver-masker" style="'+maskStyle+';display: none;width: 100%;min-height:100%; z-index:100; position: absolute;">'+
+				'<style>'+
+				'.popover:before, .popover:after{'+
+					'left:'+arrowSite+';'+
+				'}'+
+				'</style>'+
+				'</div>');
 
 			this.render();
 
         },
+
+        poperties:{},
 
 		render: function() {
 			var me = this;
@@ -43,6 +53,23 @@ define(['zepto', 'backbone', 'gmu', 'components/fixed'], function($, Backbone, g
 
 			var target = $(me.el).attr('target'); /* add by fengqiuming 20130605    */
 			if(target==''|| null) target = trigger;
+			var closeTrigger = $(me.el).attr('closeTrigger'); /* add by fengqiuming 20130720    */
+			if(closeTrigger==''|| null)closeTrigger = 'self';
+			this.poperties.closeTrigger=closeTrigger;
+			if(this.poperties.closeTrigger!='self'){
+				$(me.el).find(this.poperties.closeTrigger).click(function(){
+					me.onHide();
+				});
+			}
+
+
+			var horizontalMove = $(me.el).attr('horizontalMove'); /* add by fengqiuming 20130720    */
+			if(horizontalMove==''|| null) horizontalMove = 0;
+			this.poperties.horizontalMove=parseInt(horizontalMove);
+
+			var verticalMove = $(me.el).attr('verticalMove'); /* add by fengqiuming 20130720    */
+			if(verticalMove==''|| null) verticalMove = 0;
+			this.poperties.verticalMove=parseInt(verticalMove);
 			//remove by qiuming 2013.05.06  code:var btn = $(this.config.parent).find('a[popoverTarget="#' + this.el.id + '"]')[0];
 			$(btn).bind('click', function() {
 
@@ -75,8 +102,8 @@ define(['zepto', 'backbone', 'gmu', 'components/fixed'], function($, Backbone, g
 					// alert('targetOffset.left = '+ targetOffset.left + "; targetWidth/2 = "+ targetWidth/2 +"; popoverWidth/2 = "+popoverWidth/2);
 
 					$(me.el).offset(
-						{'left' : (targetOffset.left + (targetWidth/2) /*+ (popoverWidth/2)*/ ),
-						  'top' : (targetTop + targetHeight - 35)}
+						{'left' : (targetOffset.left + (targetWidth/2) +me.poperties.horizontalMove/*+ (popoverWidth/2)*/ ),
+						  'top' : (targetTop + targetHeight - 35)+me.poperties.verticalMove}
 					);
 		        }
 
@@ -146,7 +173,9 @@ define(['zepto', 'backbone', 'gmu', 'components/fixed'], function($, Backbone, g
 		},
 		onClick: function(e) {
 			console.log('popover:select');
-			this.onHide();
+			if(this.poperties.closeTrigger=='self'){
+				this.onHide();
+			}
 		},
 		onHide: function() {
 			$(this.el).css('display', 'none');

@@ -106,7 +106,8 @@
 
             for (var i = 0; i < jsonArray.length; i++) {
                 var item = jsonArray[i];
-                // item.index = i;
+                item.index = i;
+                item.mainDatas = jsonArray;
                 var li = $("<li/>");
                 li.addClass('cube-list-item');
                 var extendLi = $("<li/>");
@@ -273,6 +274,50 @@
                 elContext = view;
                 var extendablelist = new ExtendableList(config);
                 console.log('extendablelist:compile  end');
+
+		//处理三星s4 点击事件触发两次  
+                Cache.put(config.id+'Onload',0);
+                function listSizeFix(){
+                    var bodyHeight = $(window).height();
+                    var currentTop = $(list_el).offset().top;
+                    var finalHeight = bodyHeight - currentTop;
+
+                    if(config.height){
+                        finalHeight = config.height;
+                    }
+
+                    if(config.additionHeight){
+                        finalHeight = finalHeight+parseInt(config.additionHeight);
+                    }
+
+                    $('html').css({'min-height':currentTop})
+                    $('body').find(list_el).css({'height':((finalHeight)+'px')})
+                        
+                    $('.cube-list-item-more-record').css({'border-bottom':'0px'});
+
+                }
+                var timer=setInterval(function(){
+                    if($('body').find(list_el).length>0){
+                            //do something
+                            listSizeFix();
+                        }
+
+
+                    var onloadCounter =parseInt(Cache.get(config.id+'Onload'))+1;
+                    if(onloadCounter==1){
+                        $(window).on('resize', listSizeFix);
+                        $(list_el).unload(function(){
+                            $(window).off('resize', listSizeFix);
+                        })
+
+                    }
+                    if(onloadCounter>1&&$('body').find(list_el).length==0){
+                        clearInterval(timer);
+                        console.log('enddddd');
+                    }else{
+                        Cache.put(config.id+'Onload',onloadCounter);
+                    }
+                },500);
                 return extendablelist;
             });
         }

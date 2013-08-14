@@ -57,7 +57,9 @@ define(['zepto', 'underscore'], function($, _){
         };
         if(this.config.autoshow && !this.isShow()) {
             this.show();
-            disableScrolling();
+ 	    if(config.disableScroll){
+            	disableScrolling();
+ 	    }
         }
         
 

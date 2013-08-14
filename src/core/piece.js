@@ -25,7 +25,7 @@ if (pieceConfig.enablePhoneGap === undefined) {
 }
 
 //如果没有自定义，或者定义了但是不是module，那么默认是从根目录进入
-if (pieceConfig.loadFrom !== "module") {
+if (pieceConfig.loadFrom === "root") {
 	require.config({
 		baseUrl: '.',
 	});
