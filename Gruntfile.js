@@ -50,10 +50,17 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		rename: {
+			pieceInExamples: {
+				src: 'examples/dist/',
+				dest: 'examples/piece'
+			}
+		},
+
 		//claen the dist before copy & compile files
 		clean: {
 			dist: ["dist/"],
-			examples: ["examples/piece", "examples/dist"],
+			examples: ["examples/piece"],
 			cache: [".sass-cache/", "temp/"]
 		},
 		requirejs: {
@@ -96,12 +103,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 
 	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-rename');
 
-	// grunt.registerTask('default', ["clean:examples", 'copy:examples']);
 
-	grunt.registerTask('default', ["clean:dist", "clean:examples", "compass", 'copy:main', 'requirejs', 'concat', "clean:cache", 'copy:examples']);
-	// grunt.registerTask('default', ["clean", "compass", "bower", 'copy', 'requirejs', 'concat']);
-
-	// grunt.registerTask('default', ["requirejs"]);
+	grunt.registerTask('default', ["clean:dist", "compass", 'copy:main', 'requirejs', 'concat', "clean:cache"]);
+	grunt.registerTask('examples', ['default', 'clean:examples', 'copy:examples', 'rename:pieceInExamples']);
 
 };
