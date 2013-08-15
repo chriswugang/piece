@@ -1,13 +1,8 @@
-var mkdirp      = require('mkdirp'),
-	path		= require('path'),
-	fs			= require('fs'),
-	ncp         = require('ncp').ncp,
-	template	= require('./template');
-
-var red, blue, reset;
-red = '\033[31m';
-blue = '\033[34m';
-reset = '\033[0m';
+var mkdirp    = require('mkdirp'),
+		path			= require('path'),
+		fs				= require('fs'),
+		ncp       = require('ncp').ncp,
+		template	= require('./template');
 
 module.exports = function(program){
 	
@@ -32,11 +27,15 @@ function createProject(name) {
 	var app_fullpath = path.resolve('.', name);
 
 	if(fs.existsSync(app_fullpath)){
-		console.log(red + 'folder not empty.' + reset);
+		console.log('folder not empty.');
 		return;
 	}
 	//create project folder
 	mkdir(app_fullpath, function() {
+
+		//copy Gruntfile
+		template('Gruntfile.js', path.resolve('.', app_fullpath, 'Gruntfile.js'));
+
 		//copy framework from sdk to project folder
 		cp(path.resolve(__dirname, '..', 'dist'), path.resolve(app_fullpath, 'piece'), function(){
 
@@ -80,7 +79,7 @@ function mkdir(path, fn) {
 function cp(src, dest, fn) {
   ncp(src, dest, function(err) {
     if (err) throw err;
-    console.log('    \033[36m copy\033[0m : %s \033[36mto\033[0m : %s', src, dest);
+    console.log('   \033[36mcreate\033[0m : ' + dest);
     fn && fn();
   });
 }

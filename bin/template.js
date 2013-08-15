@@ -1,13 +1,15 @@
 var Handlebars 	= require('handlebars'),
 	path 		= require('path'),
-	fs 			= require('fs');
+	fs 			= require('fs'),
+	c  			= require('./clicolors');
 
 module.exports = function(src, dest, data){
+	console.log(c.blue + '   create : ' + c.reset + dest);
 	var filePath = path.resolve(__dirname, '..', 'templates', src);
-	fs.readFile(filePath, {encoding: 'utf-8'}, function(err, fileData) {
-    	if (err) throw err;
-    	var template = Handlebars.compile(fileData);
-    	//write
-	    fs.writeFile(dest, template(data), {encoding: 'utf-8'});
-  });
+	//read
+	var fileData = fs.readFileSync(filePath, {encoding: 'utf-8'});
+	//compile
+	var template = Handlebars.compile(fileData);
+	//write
+    fs.writeFileSync(dest, template(data), {encoding: 'utf-8'});
 }
