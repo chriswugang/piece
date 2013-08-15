@@ -1,4 +1,4 @@
-define(['text!examples/detailView.html'], function(detailViewTemplate) {
+define(['text!flight/detailView.html'], function(detailViewTemplate) {
 
 	var View = Piece.View.extend({
 

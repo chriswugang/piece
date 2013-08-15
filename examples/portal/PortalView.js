@@ -1,8 +1,10 @@
-define(['cube/cube', 'text!com.foss.bb/listView.html'], function(Cube, listViewTemplate) {
+define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
-    var IndexView = Cube.View.extend({
+    var IndexView = Piece.View.extend({
 
         id: 'flightstatus-list',
+
+        type: 'portal',
 
         events: {
             "click #querymore": "queryMore",
@@ -18,11 +20,9 @@ define(['cube/cube', 'text!com.foss.bb/listView.html'], function(Cube, listViewT
 
             $(this.el).html(listViewTemplate);
 
-            Cube.View.prototype.render.call(this);
+            Piece.View.prototype.render.call(this);
 
             this.component('io').triggerChange();
-
-            alert("paddddddddddddddddddddddddddddddddddd");
 
             return this;
         },
@@ -43,16 +43,16 @@ define(['cube/cube', 'text!com.foss.bb/listView.html'], function(Cube, listViewT
 
         queryMore: function() {
             console.info(this.container);
-            this.container.navigateForResult('/com.foss.m2/selectView', {
+            this.container.navigateForResult('/examples/selectView', {
                 trigger: true
-            }, '/com.foss.bb/listView', this.onGotResult);
+            }, '/examples/listView', this.onGotResult);
         },
 
         reload: function() {
             console.info(this.container);
-            this.container.navigateForResult('/com.foss.demo2/demoIndex', {
+            this.container.navigateForResult('/examples/demoIndex', {
                 trigger: true
-            }, '/com.foss.demo2/dialog', this.onGotResult);
+            }, '/examples/dialog', this.onGotResult);
         }
     });
 

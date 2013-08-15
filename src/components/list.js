@@ -208,6 +208,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             if (Cache.get(CACHE_ID)) {
                 var olddata = Cache.get(CACHE_ID);
                 data = olddata[index];
+ 		data.mainDatas=null;
             }
             // var nodeName = e.toElement.nodeName;
             var nodeName = e.toElement != null ? e.toElement.nodeName : e.target.nodeName;

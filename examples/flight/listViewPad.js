@@ -1,6 +1,6 @@
-define(['text!examples/listView.html'], function(listViewTemplate) {
+define(['cube/cube', 'text!flight/listView.html'], function(Cube, listViewTemplate) {
 
-    var IndexView = Piece.View.extend({
+    var IndexView = Cube.View.extend({
 
         id: 'flightstatus-list',
 
@@ -18,9 +18,11 @@ define(['text!examples/listView.html'], function(listViewTemplate) {
 
             $(this.el).html(listViewTemplate);
 
-            Piece.View.prototype.render.call(this);
+            Cube.View.prototype.render.call(this);
 
             this.component('io').triggerChange();
+
+            alert("paddddddddddddddddddddddddddddddddddd");
 
             return this;
         },
@@ -41,16 +43,16 @@ define(['text!examples/listView.html'], function(listViewTemplate) {
 
         queryMore: function() {
             console.info(this.container);
-            this.container.navigateForResult('/examples/selectView', {
+            this.container.navigateForResult('/com.foss.m2/selectView', {
                 trigger: true
-            }, '/examples/listView', this.onGotResult);
+            }, '/com.foss.bb/listView', this.onGotResult);
         },
 
         reload: function() {
             console.info(this.container);
-            this.container.navigateForResult('/examples/demoIndex', {
+            this.container.navigateForResult('/com.foss.demo2/demoIndex', {
                 trigger: true
-            }, '/examples/dialog', this.onGotResult);
+            }, '/com.foss.demo2/dialog', this.onGotResult);
         }
     });
 

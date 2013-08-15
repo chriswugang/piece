@@ -55,6 +55,7 @@
                 if(me.config.extendRoot){
                     _.each(me.config['extendRoot'].split('.'), function(element){
                             data = data[element];
+			    data.mainDatas=null;
                     });
                 }
             }

@@ -1,10 +1,8 @@
-define(['text!examples/PortalView.html'], function(listViewTemplate) {
+define(['text!flight/listView.html'], function(listViewTemplate) {
 
     var IndexView = Piece.View.extend({
 
         id: 'flightstatus-list',
-
-        type: 'portal',
 
         events: {
             "click #querymore": "queryMore",

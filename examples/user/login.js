@@ -1,5 +1,5 @@
-define(['require', 'text!examples/login.html'],
-	function(require, viewTemplate) {
+define(['text!user/login.html'],
+	function(viewTemplate) {
 
 		return Piece.View.extend({
 
@@ -10,6 +10,9 @@ define(['require', 'text!examples/login.html'],
 
 				Piece.View.prototype.render.call(this);
 				return this;
+			},
+			onShow: function() {
+				//write your business logic here 
 			}
 		}); //view define
 
