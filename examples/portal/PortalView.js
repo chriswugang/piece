@@ -1,4 +1,4 @@
-define(['text!examples/PortalView.html'], function(listViewTemplate) {
+define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
     var IndexView = Piece.View.extend({
 

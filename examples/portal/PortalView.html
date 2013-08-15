@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>变色龙</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+
+  <meta http-equiv="X-Frame-Options" content="ALLOW-FROM">
+  <meta http-equiv="pragma" content="no-cache" />
+
+  <link href="../dist/css/piece.css" rel="stylesheet"/>
+
+  <script type="text/javascript">
+      var require = {
+          urlArgs: "bust=" +  (new Date()).getTime()
+      };
+      var pieceConfig ={
+          defaultModule:"portal",
+          defaultView:"PortalView" 
+      };
+  </script>
+
+  <script type="text/javascript" src="../dist/js/piece.js"></script>
+
+</head>
+<body>
+  <header class="bar-title">
+    <a id="refresh" class="button">返回</a>
+    <h1 class="title">航班动态</h1>
+    <a id="querymore" class="button">更多查询</a>
+  </header>
+  <nav class="bar-standard bar-header-secondary">
+    <ul id="io" class="segmented-controller">
+      <li class="active" data-value="out">
+        <a href="#">出港</a>
+      </li>
+      <li data-value="in">
+        <a href="#">进港</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">hello world !</div>
+</body>
+</html>
