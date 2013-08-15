@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 			dist: {
 				src: ['src/vendor/requirejs/js/require.js', 'dist/js/piece.js'],
 				dest: 'dist/js/piece.js',
-			},
+			}
 		},
 		compass: { // Task
 			dist: { // Target
