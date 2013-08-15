@@ -1,6 +1,6 @@
 define(function(require) {
-	var v1 = require('com.foss.bb/listViewPad'),
-		v2 = require('com.foss.bb/detailView');
+	var v1 = require('flight/listView'),
+		v2 = require('flight/detailView');
 	return {
 		'default': v1,
 		'listView': v1,

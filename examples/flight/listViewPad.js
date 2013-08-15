@@ -1,4 +1,4 @@
-define(['cube/cube', 'text!com.foss.bb/listView.html'], function(Cube, listViewTemplate) {
+define(['cube/cube', 'text!flight/listView.html'], function(Cube, listViewTemplate) {
 
     var IndexView = Cube.View.extend({
 

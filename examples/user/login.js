@@ -1,4 +1,4 @@
-define(['require', 'text!examples/login.html'],
+define(['require', 'text!user/login.html'],
 	function(require, viewTemplate) {
 
 		return Piece.View.extend({

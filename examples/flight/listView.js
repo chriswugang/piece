@@ -1,4 +1,4 @@
-define(['text!examples/listView.html'], function(listViewTemplate) {
+define(['text!flight/listView.html'], function(listViewTemplate) {
 
     var IndexView = Piece.View.extend({
 
