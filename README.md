@@ -33,7 +33,7 @@ note: you may required using sudo
 
 (The MIT License)
 
-Copyright (c) 2009-2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;
+Copyright (c) 2013 Justin Yip justin.yip@foxmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
