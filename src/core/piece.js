@@ -55,6 +55,7 @@ require.config({
 		core: 'src/core',
 		components: 'src/components'
 	},
+	waitSeconds: 30,
 	shim: {
 		backbone: {
 			deps: ['underscore'],
