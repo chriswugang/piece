@@ -38,22 +38,22 @@ if (pieceConfig.loadFrom === "root") {
 require.config({
 	paths: {
 		//plugin
-		text: 'src/vendor/requirejs-text/js/text',
-		domReady: 'src/vendor/requirejs-domready/js/domready',
-		i18n: 'src/vendor/requirejs-i18n/js/i18n',
+		text: 'piece/js/vendor/requirejs-text/js/text',
+		domReady: 'piece/js/vendor/requirejs-domready/js/domready',
+		i18n: 'piece/js/vendor/requirejs-i18n/js/i18n',
 		//lib
-		zepto: 'src/vendor/zepto/js/zepto',
-		underscore: 'src/vendor/underscore/js/underscore',
-		backbone: 'src/vendor/backbone/js/backbone',
-		fastclick: 'src/vendor/fastclick/js/fastclick',
-		canvasloader: 'src/components/canvasloader',
+		zepto: 'piece/js/vendor/zepto/js/zepto',
+		underscore: 'piece/js/vendor/underscore/js/underscore',
+		backbone: 'piece/js/vendor/backbone/js/backbone',
+		fastclick: 'piece/js/vendor/fastclick/js/fastclick',
+		canvasloader: 'piece/js/components/canvasloader',
 
-		gmu: 'src/components/gmu',
+		gmu: 'piece/js/components/gmu',
 
 		//path
-		vendor: 'src/vendor',
-		core: 'src/core',
-		components: 'src/components'
+		vendor: 'piece/js/vendor',
+		core: 'piece/js/core',
+		components: 'piece/js/components'
 	},
 	waitSeconds: 30,
 	shim: {
