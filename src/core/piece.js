@@ -2,8 +2,8 @@
  */
 
 var Piece;
-//defaultConfig
-var defaultConfig = {
+//pieceDefaultConfig
+var pieceDefaultConfig = {
 	loadFrom: "module",
 	defaultModule: null,
 	defaultView: null,
@@ -96,7 +96,7 @@ requirejs.config({
 	require(['zepto', "underscore", "backbone", "fastclick", "text", "i18n", "core/app", "components/components"],
 		function($, _, Backbone, FastClick, text, i18n, App, Components) {
 			Piece = Components;
-			pieceConfig = _.extend(defaultConfig, pieceConfig);
+			pieceConfig = _.extend(pieceDefaultConfig, pieceConfig);
 			FastClick.attach(document.body);
 			//hide address bar
 			if (pieceConfig.hideAddressBar) setTimeout(function() {
