@@ -76,7 +76,7 @@ requirejs.config({
 
 				App.initialize();
 
-				$('html').css('min-height', window.screen.availHeight - 44 + "px");
+				// $('html').css('min-height', window.screen.availHeight - 44 + "px");
 				// $('html').css('min-height', window.innerHeight);
 
 			}
