@@ -25,14 +25,16 @@ module.exports = function(grunt) {
 		},
 		//copy the src/images and vendor to dist
 		copy: {
-			main: {
+			src: {
 				files: [{
 					expand: true,
-					flatten: true,
-					filter: 'isFile',
-					src: ['src/images/**'],
-					dest: 'dist/images/'
-				}, {
+					cwd: 'src/',
+					src: ['js/**', 'images/**'],
+					dest: 'dist/'
+				}]
+			},
+			sass: {
+				files: [{
 					expand: true,
 					flatten: true,
 					filter: 'isFile',
@@ -43,10 +45,9 @@ module.exports = function(grunt) {
 			examples: {
 				files: [{
 					expand: true,
-					// flatten: true,
-					// filter: 'isFile',
-					src: ['dist/**'],
-					dest: 'examples/'
+					cwd: 'dist/',
+					src: ['**'],
+					dest: 'examples/piece/'
 				}]
 			}
 		},
@@ -64,13 +65,14 @@ module.exports = function(grunt) {
 			cache: [".sass-cache/", "temp/"]
 		},
 		requirejs: {
-			compile: {
+			piece: {
 				options: {
 					baseUrl: ".",
 					mainConfigFile: "config.js",
-					name: "src/core/piece.js",
+					name: "dist/js/piece.js",
 					out: "dist/js/piece.js",
-					wrap: false
+					wrap: false,
+					locale: "zh-cn"
 				}
 			}
 		},
@@ -78,17 +80,33 @@ module.exports = function(grunt) {
 			options: {
 				separator: ';',
 			},
-			dist: {
-				src: ['src/vendor/requirejs/js/require.js', 'dist/js/piece.js'],
+			pieceDebug: {
+				src: ['src/js/vendor/requirejs/js/require.js', 'dist/js/piece-debug.js'],
+				dest: 'dist/js/piece-debug.js',
+			},
+			piece: {
+				src: ['src/js/vendor/requirejs/js/require.js', 'dist/js/piece.js'],
 				dest: 'dist/js/piece.js',
 			}
 		},
+
 		compass: { // Task
 			dist: { // Target
 				options: { // Target options
 					sassDir: 'src/sass',
 					cssDir: 'temp/css',
 					environment: 'production'
+				}
+			}
+		},
+		uglify: {
+			options: {
+				mangle: true,
+				beautify:false
+			},
+			piece: {
+				files: {
+					'dist/js/piece.js': ['dist/js/piece.js']
 				}
 			}
 		}
@@ -101,12 +119,16 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-rename');
 
 
-	grunt.registerTask('default', ["clean:dist", "compass", 'copy:main', 'requirejs', 'concat', "clean:cache"]);
-	grunt.registerTask('examples', ['default', 'clean:examples', 'copy:examples', 'rename:pieceInExamples']);
+	grunt.registerTask('clean-builded', ['clean:dist', 'clean:examples']);
+	grunt.registerTask('build-sass', ['compass:dist', 'copy:sass']);
+	grunt.registerTask('build-piece', ['copy:src', 'requirejs:piece', 'concat:piece', 'concat:pieceDebug', 'uglify:piece']);
+	grunt.registerTask('build-examples', ['copy:examples']);
+	grunt.registerTask('clean-cache', ['clean:cache']);
+
+	grunt.registerTask('default', ['clean-builded', 'build-sass', 'build-piece', 'build-examples', 'clean-cache']);
 
 };
