@@ -136,7 +136,7 @@ module.exports = function(grunt) {
 		'clean:cache'
 	]);
 
-	grunt.registerTask('example', [
+	grunt.registerTask('examples', [
 		'clean:examples',
 		'copy:examples'
 	]);
@@ -144,6 +144,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [
 		'debug',
 		'release',
-		'example'
+		'examples'
 	]);
 };
