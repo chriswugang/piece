@@ -102,7 +102,7 @@ module.exports = function(grunt) {
 		uglify: {
 			options: {
 				mangle: true,
-				beautify:false
+				beautify: false
 			},
 			piece: {
 				files: {
@@ -122,13 +122,41 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-compass');
 	grunt.loadNpmTasks('grunt-rename');
 
+	grunt.registerTask('debug', [
+		'clean:dist',
+		'copy:src',
+		'concat:pieceDebug'
+	]);
 
-	grunt.registerTask('clean-builded', ['clean:dist', 'clean:examples']);
-	grunt.registerTask('build-sass', ['compass:dist', 'copy:sass']);
-	grunt.registerTask('build-piece', ['copy:src', 'requirejs:piece', 'concat:piece', 'concat:pieceDebug', 'uglify:piece']);
-	grunt.registerTask('build-examples', ['copy:examples']);
-	grunt.registerTask('clean-cache', ['clean:cache']);
 
-	grunt.registerTask('default', ['clean-builded', 'build-sass', 'build-piece', 'build-examples', 'clean-cache']);
+	grunt.registerTask('release', [
+		'compass:dist',
+		'copy:sass',
+		'requirejs:piece',
+		'concat:piece',
+		'uglify:piece',
+		'clean:cache'
+	]);
+
+
+	grunt.registerTask('example', [
+		'clean:examples',
+		'copy:examples'
+	]);
+
+	grunt.registerTask('default', [
+		'debug',
+		'release',
+		'example'
+	]);
+
+
+	// grunt.registerTask('clean-builded', ['clean:dist', 'clean:examples']);
+	// grunt.registerTask('build-sass', ['compass:dist', 'copy:sass']);
+	// grunt.registerTask('build-piece', ['copy:src', 'requirejs:piece', 'concat:piece', 'concat:pieceDebug', 'uglify:piece']);
+	// grunt.registerTask('build-examples', ['copy:examples']);
+	// grunt.registerTask('clean-cache', ['clean:cache']);
+
+	// grunt.registerTask('default', ['clean-builded', 'build-sass', 'build-piece', 'build-examples', 'clean-cache']);
 
 };

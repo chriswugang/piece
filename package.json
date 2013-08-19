@@ -40,7 +40,6 @@
     "grunt-bower-task": "~0.2.3",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-sass": "~0.4.1",
-    "grunt-contrib-compass": "~0.4.1",
-    "grunt-rename": "~0.1.2"
+    "grunt-contrib-compass": "~0.4.1"
   }
 }
