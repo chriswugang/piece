@@ -120,14 +120,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-rename');
 
 	grunt.registerTask('debug', [
 		'clean:dist',
 		'copy:src',
 		'concat:pieceDebug'
 	]);
-
 
 	grunt.registerTask('release', [
 		'compass:dist',
@@ -137,7 +135,6 @@ module.exports = function(grunt) {
 		'uglify:piece',
 		'clean:cache'
 	]);
-
 
 	grunt.registerTask('example', [
 		'clean:examples',
@@ -149,14 +146,4 @@ module.exports = function(grunt) {
 		'release',
 		'example'
 	]);
-
-
-	// grunt.registerTask('clean-builded', ['clean:dist', 'clean:examples']);
-	// grunt.registerTask('build-sass', ['compass:dist', 'copy:sass']);
-	// grunt.registerTask('build-piece', ['copy:src', 'requirejs:piece', 'concat:piece', 'concat:pieceDebug', 'uglify:piece']);
-	// grunt.registerTask('build-examples', ['copy:examples']);
-	// grunt.registerTask('clean-cache', ['clean:cache']);
-
-	// grunt.registerTask('default', ['clean-builded', 'build-sass', 'build-piece', 'build-examples', 'clean-cache']);
-
 };
