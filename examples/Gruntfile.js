@@ -55,6 +55,18 @@ module.exports = function(grunt) {
           wrap: false,
           inlineText: true,
           locale: "zh-cn",
+          optimize: "uglify",
+          uglify: {
+            toplevel: true,
+            ascii_only: true,
+            beautify: false,
+            max_line_length: 10000,
+            defines: {
+              DEBUG: ["name", "false"]
+            },
+            no_mangle: false
+          },
+          optimizeCss: "standard",
           modules: [{
             name: "user/module"
           }, {
