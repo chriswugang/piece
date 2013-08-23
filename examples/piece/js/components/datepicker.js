@@ -8,6 +8,7 @@ define(['backbone', 'underscore', 'zepto'], function(Backbone, _, $) {
     // monthChangeable {Boolean}: (可选，默认：false) 设置是否让月份可选择
     // yearChangeable {Boolean}: (可选，默认：false) 设置是否让年份可选择
     // events 所有Trigger Events中提及的事件都可以在此设置Hander, 如init: function(e){}。
+    // parentEl 可以指定生成的日历元素位置，默认指定是当前父元素内
 
     //Trigger Events
     // 名称              处理函数参数                    描述
@@ -29,6 +30,7 @@ define(['backbone', 'underscore', 'zepto'], function(Backbone, _, $) {
 
             var selectYearBefore = $(this.el).attr('data-selectYearBefore');
             var selectYearAfter = $(this.el).attr('data-selectYearAfter');
+            var parentEl = $(this.el).attr('data-parentEl');
 
             var me = this;
             var datepickerHtml = $('<div></div>');
@@ -52,7 +54,11 @@ define(['backbone', 'underscore', 'zepto'], function(Backbone, _, $) {
                 datepickerHtml.show();
             });
             datepickerHtml.hide();
-            $(this.el).parent().append(datepickerHtml);
+            if (parentEl === null) {
+                $(this.el).parent().append(datepickerHtml);
+            } else {
+                $(parentEl).append(datepickerHtml);
+            }
         }
     }, {
         compile: function(elContext) {
