@@ -1,9 +1,10 @@
 define(function(require) {
-	var v1 = require('flight/listView'),
-		v2 = require('flight/detailView');
-	return {
-		'default': v1,
-		'listView': v1,
-		'detailView': v2
-	};
+     var v1 = require('flight/detailView');
+     var v2 = require('flight/listView');
+     var v3 = require('flight/listViewPad');
+     return {
+         'detailView': v1,
+         'listView': v2,
+         'listViewPad': v3
+      }
 });

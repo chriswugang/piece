@@ -1,6 +1,6 @@
-define(['cube/cube', 'text!flight/listView.html'], function(Cube, listViewTemplate) {
+define(['text!flight/listView.html'], function(listViewTemplate) {
 
-    var IndexView = Cube.View.extend({
+    var IndexView = Piece.View.extend({
 
         id: 'flightstatus-list',
 
@@ -18,7 +18,7 @@ define(['cube/cube', 'text!flight/listView.html'], function(Cube, listViewTempla
 
             $(this.el).html(listViewTemplate);
 
-            Cube.View.prototype.render.call(this);
+            Piece.View.prototype.render.call(this);
 
             this.component('io').triggerChange();
 

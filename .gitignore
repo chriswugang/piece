@@ -12,6 +12,10 @@ logs
 results
 .sass-cache
 
+examples/archive
+examples/dist
+examples/node_modules
+
 npm-debug.log
 /node_modules
 src/.DS_Store
