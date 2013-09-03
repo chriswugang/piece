@@ -8,12 +8,16 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         events: {
             "click #querymore": "queryMore",
-            "click #refresh": "reload"
+            "click #refresh": "reload",
+            'click body': 'sayHello'
         },
 
         bindings: {
             "Segment:change io": "onIOChange",
             "List:select flightstatus-list": "onItemSelect"
+        },
+        sayHello: function() {
+            alert("hello");
         },
 
         render: function() {
@@ -25,6 +29,13 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
             this.component('io').triggerChange();
 
             return this;
+        },
+        
+        onShow: function() {
+            // alert("..");
+            $("body").click(function(){
+                alert("=.=");
+            });
         },
 
         onItemSelect: function(list, data) {
@@ -39,6 +50,7 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         onIOChange: function(comp) {
             var io = comp.getValue();
+            console.info("=.=");
         },
 
         queryMore: function() {

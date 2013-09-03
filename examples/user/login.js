@@ -5,6 +5,13 @@ define(['text!user/login.html'],
 
 			id: 'login_login',
 
+			events: {
+				"click #login_login": "sayHello"
+			},
+
+			sayHello: function() {
+				alert("=.=");
+			},
 			render: function() {
 				$(this.el).html(viewTemplate);
 
@@ -12,6 +19,7 @@ define(['text!user/login.html'],
 				return this;
 			},
 			onShow: function() {
+				$("#login_login").off();
 				//write your business logic here 
 			}
 		}); //view define
