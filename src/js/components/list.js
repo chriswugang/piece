@@ -1,4 +1,3 @@
-
 /*
  * 列表组件，最终转换出html5
  * <div id="passenger-list">
@@ -26,8 +25,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             /*提取到父类*/
             observers: [],
             /*自有*/
-            width:'100%',
-            height:'500',
+            width: '100%',
+            height: '500',
             autoLoad: "true",
             pageParam: 'page',
             pageSizeParam: 'pageSize',
@@ -40,7 +39,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             iScroll: false,
             method: 'GET',
             filterStr: null,
-            momentum:true
+            momentum: true
         },
 
         request: null,
@@ -76,7 +75,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                         while (target.nodeType != 1) target = target.parentNode;
                         if (target.tagName != 'TEXTAREA' && target.tagName != 'INPUT' && target.tagName != 'SELECT') e.preventDefault();
                     },
-                    topOffset:config.topOffset,
+                    topOffset: config.topOffset,
                     useTransition: true,
                     onRefresh: function() {
                         pullUpEl = me.$('#pullUp')[0];
@@ -106,44 +105,46 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                                 //this.maxScrollY = pullUpOffset;
                             }
 
-                            
-}
-                            var pullDownRefreshHeight = 40;
-                            pullDownRefreshEl = me.$('#PullDownRefresh')[0];
-                            if (pullDownRefreshEl) {
-                                if((this.y > pullDownRefreshHeight)&&(this.options.topOffset>0)){
 
-                                    this.options.topOffset=0;
-                                    $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({'class':'pullDownIn'});
-                                    $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Release to reload...');
-                                    $(me.$('#pullDownRefreshIconWarp')[0]).addClass('pullDownFlip180');
+                        }
+                        var pullDownRefreshHeight = 40;
+                        pullDownRefreshEl = me.$('#PullDownRefresh')[0];
+                        if (pullDownRefreshEl) {
+                            if ((this.y > pullDownRefreshHeight) && (this.options.topOffset > 0)) {
+
+                                this.options.topOffset = 0;
+                                $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({
+                                    'class': 'pullDownIn'
+                                });
+                                $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Release to reload...');
+                                $(me.$('#pullDownRefreshIconWarp')[0]).addClass('pullDownFlip180');
 
 
 
-                                }else if((this.y < pullDownRefreshHeight)&&(this.options.topOffset==0)){
-                                    this.options.topOffset = parseInt($(pullDownRefreshEl).css('height'));
-                                    $(pullDownRefreshEl).find('#pullDownRefreshIcon').removeClass('pullDownOut').addClass('pullDownIn');
-                                    $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Pull down to reload...');
-                                    Cache.put("onScrollMove","false");
-                                    $(me.$('#pullDownRefreshIconWarp')[0]).removeClass('pullDownFlip180');
+                            } else if ((this.y < pullDownRefreshHeight) && (this.options.topOffset == 0)) {
+                                this.options.topOffset = parseInt($(pullDownRefreshEl).css('height'));
+                                $(pullDownRefreshEl).find('#pullDownRefreshIcon').removeClass('pullDownOut').addClass('pullDownIn');
+                                $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Pull down to reload...');
+                                Cache.put("onScrollMove", "false");
+                                $(me.$('#pullDownRefreshIconWarp')[0]).removeClass('pullDownFlip180');
 
-                                }else if(this.y > 0){
-                                    Cache.put("onScrollMove","false");
+                            } else if (this.y > 0) {
+                                Cache.put("onScrollMove", "false");
 
-                                }
-                        
+                            }
+
 
                         }
                     },
-                    onBeforeScrollEnd: function(){
+                    onBeforeScrollEnd: function() {
                         pullDownRefreshEl = me.$('#PullDownRefresh')[0];
 
-                        if((pullDownRefreshEl!=null)&&(this.options.topOffset == 0)){
-                                $(pullDownRefreshEl).find('#pullDownRefreshIcon')
-                                    .removeClass('pullDownIn')
-                                    .addClass('pullDownOut');
-                                $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Reloading...');
-                                this.refresh();
+                        if ((pullDownRefreshEl != null) && (this.options.topOffset == 0)) {
+                            $(pullDownRefreshEl).find('#pullDownRefreshIcon')
+                                .removeClass('pullDownIn')
+                                .addClass('pullDownOut');
+                            $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Reloading...');
+                            this.refresh();
 
                         }
                         // 
@@ -160,25 +161,29 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                                 me.config.page = me.config.page + 1;
                                 me.loadNextPage();
 
-                                Cache.put("onScrollMove","false");
+                                Cache.put("onScrollMove", "false");
                             }
                         }
 
                         pullDownRefreshEl = me.$('#PullDownRefresh')[0];
-                        if((pullDownRefreshEl!=null)&&(this.options.topOffset == 0)){
-                                var that = this;
+                        if ((pullDownRefreshEl != null) && (this.options.topOffset == 0)) {
+                            var that = this;
 
-                                $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({'class':'pullDownOut'});
-                                me.loadNextPage(function(){
-                                    Cache.put("onScrollMove","false");
-                                    $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Pull down to refresh...');
-                                    that.options.topOffset = parseInt($(pullDownRefreshEl).css('height'));
-                                    $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({'class':'pullDownIn'});
-                                    $(me.$('#pullDownRefreshIconWarp')[0]).removeClass('pullDownFlip180');
-                                    that.refresh();
-                                    
+                            $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({
+                                'class': 'pullDownOut'
+                            });
+                            me.loadNextPage(function() {
+                                Cache.put("onScrollMove", "false");
+                                $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Pull down to refresh...');
+                                that.options.topOffset = parseInt($(pullDownRefreshEl).css('height'));
+                                $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({
+                                    'class': 'pullDownIn'
                                 });
-                                
+                                $(me.$('#pullDownRefreshIconWarp')[0]).removeClass('pullDownFlip180');
+                                that.refresh();
+
+                            });
+
 
 
                         }
@@ -194,8 +199,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
         },
 
         onItemSelect: function(e) {
-            if(Cache.get("onScrollMove")=="true"){
-                Cache.put("onScrollMove","false");
+            if (Cache.get("onScrollMove") == "true") {
+                Cache.put("onScrollMove", "false");
                 return;
             }
 
@@ -208,7 +213,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             if (Cache.get(CACHE_ID)) {
                 var olddata = Cache.get(CACHE_ID);
                 data = olddata[index];
- 		data.mainDatas=null;
+                data.mainDatas = null;
             }
             // var nodeName = e.toElement.nodeName;
             var nodeName = e.toElement != null ? e.toElement.nodeName : e.target.nodeName;
@@ -300,10 +305,10 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             }
             for (var i = 0; i < jsonArray.length; i++) {
                 var item = jsonArray[i];
-		
- 		item.index = i;
+
+                item.index = i;
                 item.mainDatas = jsonArray;
-		
+
                 // item.index = i;
                 var li = $("<li/>");
                 li.addClass('cube-list-item');
@@ -318,14 +323,14 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                             fkword = fkword + jsonArray[i][skarry[j]] + " ";
                         }
                     }
-                    
+
                     if (jsonArray[i][skarry[skarry.length - 1]]) {
 
                         fkword = fkword + jsonArray[i][skarry[skarry.length - 1]];
                     }
                     li.attr('filter-keyword', fkword.toLowerCase());
                 }
-                
+
                 if (_itemTemplateName) li.append(_.template(templateStr, item));
                 //TODO: 需要重构
                 li.appendTo(me.el.querySelector('.contentScroller .item-content'));
@@ -407,7 +412,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                 complete: function() {
                     me.request = null;
                     me.refreshIscroll(me);
-                    if(callback){
+                    if (callback) {
                         callback();
                     }
                 },
@@ -427,7 +432,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                     if (_itemTemplateName) templateStr = this.$("#" + _itemTemplateName).html();
 
                     //append
-                    console.log("cube---list---"+jsonRoot.length + ' records in total');
+                    console.log("cube---list---" + jsonRoot.length + ' records in total');
 
                     me.loadListByJSONArray(jsonRoot);
 
@@ -469,7 +474,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
             var me = this;
             return _.map($(elContext).find("list"), function(tag) {
                 console.log('cube---list---list:compile');
-                var config = me.parseConfig(tag, ['id', 'itemTemplate', '_itemTemplate', 'moreItemElement', 'url', 'method', 'jsonRoot', 'class', 'paging', 'iScroll', 'isPullDownRefresh', 'autoLoad', 'pageParam', 'searching', 'searchkeys', 'filterStr', 'pageSize', 'skin', 'loaderText', 'searchText', 'width', 'height','additionHeight']);
+                var config = me.parseConfig(tag, ['id', 'itemTemplate', '_itemTemplate', 'moreItemElement', 'url', 'method', 'jsonRoot', 'class', 'paging', 'iScroll', 'isPullDownRefresh', 'autoLoad', 'pageParam', 'searching', 'searchkeys', 'filterStr', 'pageSize', 'skin', 'loaderText', 'searchText', 'width', 'height', 'additionHeight']);
 
                 //build html
                 //<div id="{id}">
@@ -497,25 +502,25 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
 
                 var listContainer = document.createElement('div');
                 if (config.height) {
-                    $(listContainer).attr('style','height:'+config.height+'px;');
-                }else{
+                    $(listContainer).attr('style', 'height:' + config.height + 'px;');
+                } else {
 
-                    $(listContainer).attr('style','height:600px;');
+                    $(listContainer).attr('style', 'height:600px;');
                 }
                 // listContainer.setAttribute('id', 'aaaaaaa');
 
                 var pullDownRefreshDiv;
-                if(config.isPullDownRefresh=='true'){
+                if (config.isPullDownRefresh == 'true') {
                     //var background-image=
                     pullDownRefreshDiv = document.createElement('div');
-                    $(pullDownRefreshDiv).attr('id','PullDownRefresh');
-                    $(pullDownRefreshDiv).attr('style','height: 40px;');
+                    $(pullDownRefreshDiv).attr('id', 'PullDownRefresh');
+                    $(pullDownRefreshDiv).attr('style', 'height: 40px;');
                     $(pullDownRefreshDiv).append('<span id="pullDownRefreshIconWarp"><span id="pullDownRefreshIcon"></span></span><span id="pullDownRefreshLable">Pull down to refresh...</span>');
-                    
 
-                    
-                        // $(pullDownRefreshDiv).addClass('pullDownFlip');
-                     // $(list_el).prepend(pullDownRefreshDiv);
+
+
+                    // $(pullDownRefreshDiv).addClass('pullDownFlip');
+                    // $(list_el).prepend(pullDownRefreshDiv);
                     // $(listContainer).appendChild(pullDownRefreshDiv);
                 }
 
@@ -526,8 +531,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
                 this.$(content_el).addClass('item-content');
                 scroller_el.appendChild(content_el);
 
-                 $(list_el).wrap(listContainer);
-                 $(list_el).find("div ul").prepend(pullDownRefreshDiv);
+                $(list_el).wrap(listContainer);
+                $(list_el).find("div ul").prepend(pullDownRefreshDiv);
 
                 //replace with html
                 this.$(tag).replaceWith(listContainer);
@@ -536,55 +541,61 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', '
 
                 config['el'] = list_el;
                 var pullDownRefreshHeight = parseInt($(pullDownRefreshDiv).css('height'));
-                config['topOffset']= pullDownRefreshHeight? pullDownRefreshHeight :0;
+                config['topOffset'] = pullDownRefreshHeight ? pullDownRefreshHeight : 0;
                 config.elContext = elContext;
 
                 var list = new List(config);
 
                 // $(list_el).refresh({ready:function(){}})；
-                Cache.put(config.id+'Onload',0);
-                function listSizeFix(){
+                Cache.put(config.id + 'Onload', 0);
+
+                function listSizeFix() {
                     var bodyHeight = $(window).height();
                     var currentTop = $(listContainer).offset().top;
                     var finalHeight = bodyHeight - currentTop;
 
-                    if(config.height){
+                    if (config.height) {
                         finalHeight = config.height;
                     }
 
-                    if(config.additionHeight){
-                        finalHeight = finalHeight+parseInt(config.additionHeight);
+                    if (config.additionHeight) {
+                        finalHeight = finalHeight + parseInt(config.additionHeight);
                     }
 
-                    $('html').css({'min-height':currentTop})
-                    $('body').find(listContainer).css({'height':((finalHeight)+'px')})
-                        
-                    $('.cube-list-item-more-record').css({'border-bottom':'0px'});
+                    $('html').css({
+                        'min-height': currentTop
+                    })
+                    $('body').find(listContainer).css({
+                        'height': ((finalHeight) + 'px')
+                    })
+
+                    $('.cube-list-item-more-record').css({
+                        'border-bottom': '0px'
+                    });
 
                 }
-                var timer=setInterval(function(){
-                if($('body').find(listContainer).length>0){
+                var timer = setInterval(function() {
+                    if ($('body').find(listContainer).length > 0) {
                         //do something
                         listSizeFix();
                     }
 
 
-                var onloadCounter =parseInt(Cache.get(config.id+'Onload'))+1;
-                if(onloadCounter==1){
-                    $(window).on('resize', listSizeFix);
-                    $(listContainer).unload(function(){
-                        $(window).off('resize', listSizeFix);
-                    })
+                    var onloadCounter = parseInt(Cache.get(config.id + 'Onload')) + 1;
+                    if (onloadCounter == 1) {
+                        $(window).on('resize', listSizeFix);
+                        $(listContainer).unload(function() {
+                            $(window).off('resize', listSizeFix);
+                        })
 
-                }
-                if(onloadCounter>1&&$('body').find(listContainer).length==0){
-                    clearInterval(timer);
-                    console.log('cube---list---end');
-                }else{
-                    Cache.put(config.id+'Onload',onloadCounter);
-                }
-            },500)
-
+                    }
+                    if (onloadCounter > 1 && $('body').find(listContainer).length == 0) {
+                        clearInterval(timer);
+                        console.log('cube---list---end');
+                    } else {
+                        Cache.put(config.id + 'Onload', onloadCounter);
+                    }
+                }, 500);
 
                 return list;
             });
