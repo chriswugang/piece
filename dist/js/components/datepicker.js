@@ -53,6 +53,7 @@ define(['backbone', 'underscore', 'zepto'], function(Backbone, _, $) {
             $(this.el).on("click", function() {
                 datepickerHtml.show();
             });
+            
             datepickerHtml.hide();
             if (parentEl === null) {
                 $(this.el).parent().append(datepickerHtml);
