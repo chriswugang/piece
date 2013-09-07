@@ -30,5 +30,19 @@ function cp(src, dest, fn) {
   });
 }
 
+module.exports.printIPAddress = function(){
+  var os=require('os');
+  var ifaces=os.networkInterfaces();
+  for (var dev in ifaces) {
+    var alias=0;
+    ifaces[dev].forEach(function(details){
+      if (details.family=='IPv4') {
+        console.log(dev+(alias?':'+alias:''),details.address);
+        ++alias;
+      }
+    });
+  }
+}
+
 module.exports.cp = cp;
 module.exports.mkdir = mkdir;

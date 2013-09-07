@@ -26,6 +26,7 @@ function runServer() {
   });
   app.get('/app.zip', function(req, res){
     var debugTempPath = path.resolve('.', '.debug-tmp');
+
     //remove debug directory
     rimraf(debugTempPath, function(error){
       if(error) throw error;
@@ -37,7 +38,7 @@ function runServer() {
         //read recursively
         fs.readdir(path.resolve('.'), function(err, files){
           //filter '.'
-          files = _.reject(files, function(e){return e[0] == '.'});
+          files = _.reject(files, function(e){return e[0] == '.' || e[0] == 'node_modules'});
           //map to full paths
           // files_full = _.map(files, function(e){return path.resolve('.', e)});
           //add index page
@@ -59,13 +60,12 @@ function runServer() {
             res.set("Content-Disposition", "attachment; filename=debug.zip");
             res.set('Content-Type', 'application/zip');
             res.send(zip.toBuffer());
-          });
-        });
-      });
-    });
-
-
+          });//parallel copy
+        });//readdir
+      });//mkdir
+    });//rimraf
   });
+
   //
   app.get('/packages.json', function(req, res){
   	fs.readdir(path.resolve('.'), function(err, files){
@@ -83,9 +83,10 @@ function runServer() {
   		// res.send(_.object(files, values));
   	});
   });
-  app.get('/packages/:name', function(req, res){
-    //zip and send file
-  });
+
   app.listen(3000);
+
+  console.log('local ip address:');
+  util.printIPAddress();
   console.log('piece.js Server Started, listening at 3000...');
 }

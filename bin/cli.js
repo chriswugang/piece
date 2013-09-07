@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 var program = require('commander'),
-	color = require('./clicolors'),
-	path = require('path'),
-	pkg = require('../package.json'),
-	version = pkg.version;
+		color 	= require('./clicolors'),
+		util 		= require('./util'),
+		path 		= require('path'),
+		pkg 		= require('../package.json'),
+		version = pkg.version;
 
 var ServerProgram = require('./server');
 var ChromeProgram = require('./chrome');
@@ -17,6 +18,7 @@ program
 		console.log(color.blue + 'piece.js v' + version + color.reset);
 		console.log(color.blue + 'current path: %s' + color.reset, path.resolve('.'));
 		console.log(color.blue + '    sdk path: %s' + color.reset, path.resolve(__dirname));
+		util.printIPAddress();
 	});
 
 //加载模块
