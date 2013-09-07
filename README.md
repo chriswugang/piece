@@ -1,7 +1,7 @@
 Piece.js
 =====
 
-SPA(Single Page Application) Framework for Mobile.
+Web Framework for Mobile.
 
 ## Installation
 
@@ -25,9 +25,7 @@ note: you may required using sudo
     
   start web server
   
-    $ piece server
-    
-    
+    $ piece server    
     
 ## License
 

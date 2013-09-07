@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <script src="angular.min.js"></script>
+    <script src="module.js"></script>
+  </head>
+  <body>
+
+		<div ng-controller="ModulesCtrl">
+			[ <a href="" ng-click="click()">Click Test</a> ]
+	    <ul>
+	    	<li ng-repeat="module in modules">
+	    		<div>{{module.name}}</div>
+	    		<div>{{module.version}}</div>
+	    		<button ng-click="update(module.name)">Update</button>
+	    	</li>
+	    </ul>
+    </div>
+
+  </body>
+</html>
