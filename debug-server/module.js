@@ -4,9 +4,9 @@ function ModulesCtrl($scope, $http) {
 		{name: 'bbb', version: '2.0'}
 	];
 
-	$http.get('packages.json').success(function(data){
-		$scope.modules = data;
-	});
+	// $http.get('packages.json').success(function(data){
+	// 	$scope.modules = data;
+	// });
 
 	$scope.click = function(){
 		alert('test' + $http);

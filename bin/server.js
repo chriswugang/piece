@@ -20,11 +20,13 @@ function runServer() {
   // app.use(express.cookieParser('secret-piece-js'));
   // app.use(express.cookieSession());
   app.use(express.static(path.resolve('.')));
-  app.use(express.static(path.resolve(__dirname, '..', 'debug-server')));
+  // app.use(express.static(path.resolve(__dirname, '..', 'debug-server')));
+  
   //index page
-  app.get('/', function(req, res){
-  	res.redirect('index.html');
-  });
+  // app.get('/', function(req, res){
+  // 	res.redirect('index.html');
+  // });
+
   app.get('/app.zip', function(req, res){
     var debugTempPath = path.resolve('.', '.debug-tmp');
 
@@ -68,22 +70,22 @@ function runServer() {
   });
 
   //
-  app.get('/packages.json', function(req, res){
-  	fs.readdir(path.resolve('.'), function(err, files){
-  		if (err) {throw err};
+  // app.get('/packages.json', function(req, res){
+  // 	fs.readdir(path.resolve('.'), function(err, files){
+  // 		if (err) {throw err};
   		
-  		files = _.reject(files, function(e){return e[0] == '.'});
-  		configs = _.map(files, function(e){return path.resolve('.', e, 'package.json')});
-  		async.map(configs, fs.readFile, function(err, results){
-  			if (err) {throw err};
-  			res.send(_.map(results, function(e){
-  				return JSON.parse(e);
-  			}));
-  		});
+  // 		files = _.reject(files, function(e){return e[0] == '.' });
+  // 		configs = _.map(files, function(e){return path.resolve('.', e, 'package.json')});
+  // 		async.map(configs, fs.readFile, function(err, results){
+  // 			if (err) {throw err};
+  // 			res.send(_.map(results, function(e){
+  // 				return JSON.parse(e);
+  // 			}));
+  // 		});
 
-  		// res.send(_.object(files, values));
-  	});
-  });
+  // 		// res.send(_.object(files, values));
+  // 	});
+  // });
 
   app.listen(3000);
 
