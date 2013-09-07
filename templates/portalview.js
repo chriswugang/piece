@@ -1,21 +1,19 @@
-define([
-  
-],
+define([], function() {
 
-function() {
+	var View = Piece.View.extend({
 
-  var View = Piece.View.extend({
+		el: '#{{module}}-{{view}}',
 
-    el: '#{{module}}-{{view}}',
+		type: 'portal',
 
-    type: 'portal',
+		render: function() {
+			return this;
+		},
+		onShow: function() {
+			//write your business logic here :)
+		}
+	});
 
-    render: function() {
-
-      return this;
-    }
-  });
-
-  return View;
+	return View;
 
 });

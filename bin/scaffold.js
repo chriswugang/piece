@@ -1,33 +1,33 @@
-var mkdirp    = require('mkdirp'),
-		path			= require('path'),
-		fs				= require('fs'),
-		ncp       = require('ncp').ncp,
-		template	= require('./template');
+var mkdirp = require('mkdirp'),
+	path = require('path'),
+	fs = require('fs'),
+	ncp = require('ncp').ncp,
+	template = require('./template');
 
-module.exports = function(program){
-	
-	program
-	.command('create <name>')
-	.description('create a new application')
-	.action(createProject);
+module.exports = function(program) {
 
 	program
-	.command('module <name>')
-	.description('create module')
-	.action(createModule);
+		.command('create <name>')
+		.description('create a new application')
+		.action(createProject);
 
 	program
-	.command('view <module> <name>')
-	.description('create view')
-	.action(createView);
+		.command('module <name>')
+		.description('create module')
+		.action(createModule);
+
+	program
+		.command('view <module> <name>')
+		.description('create view')
+		.action(createView);
 };
 
 function createProject(name) {
 
 	var app_fullpath = path.resolve('.', name);
 
-	if(fs.existsSync(app_fullpath)){
-		console.log('folder not empty.');
+	if (fs.existsSync(app_fullpath)) {
+		console.log('folder not empty. Project alredy exist.');
 		return;
 	}
 	//create project folder
@@ -36,25 +36,40 @@ function createProject(name) {
 		//copy Gruntfile
 		template('Gruntfile.js', path.resolve('.', app_fullpath, 'Gruntfile.js'));
 
-		//copy framework from sdk to project folder
-		cp(path.resolve(__dirname, '..', 'dist'), path.resolve(app_fullpath, 'piece'), function(){
+		//copy package
+		template('package.json', path.resolve('.', app_fullpath, 'package.json'));
 
+		//copy framework from sdk to project folder
+		cp(path.resolve(__dirname, '..', 'dist'), path.resolve(app_fullpath, 'piece'), function() {
 			console.log('%s created.', name);
+			console.log('please execute : \n cd %s \n sudo npm install', name);
 		});
 	});
 }
 
 function createModule(name) {
 	mkdir(path.resolve('.', name), function() {
-		template('portalview.html', path.resolve('.', name, 'index.html'), {module: name, view: 'index'});
-		template('portalview.js', path.resolve('.', name, 'index.js'), {module: name, view: 'index'});
+		template('portalview.html', path.resolve('.', name, 'index.html'), {
+			module: name,
+			view: 'index'
+		});
+		template('portalview.js', path.resolve('.', name, 'index.js'), {
+			module: name,
+			view: 'index'
+		});
 	});
 }
 
-function createView (module, view) {
+function createView(name, view) {
 
-	template('view.html', path.resolve('.', name, view + '.html'), {module: name, view: view});
-	template('view.js', path.resolve('.', name, view + '.js'), {module: name, view: view});
+	template('view.html', path.resolve('.', name, view + '.html'), {
+		module: name,
+		view: view
+	});
+	template('view.js', path.resolve('.', name, view + '.js'), {
+		module: name,
+		view: view
+	});
 }
 
 /**
@@ -65,11 +80,11 @@ function createView (module, view) {
  */
 
 function mkdir(path, fn) {
-  mkdirp(path, 0755, function(err) {
-    if (err) throw err;
-    console.log('   \033[36mcreate\033[0m : ' + path);
-    fn && fn();
-  });
+	mkdirp(path, 0755, function(err) {
+		if (err) throw err;
+		console.log('   \033[36mcreate\033[0m : ' + path);
+		fn && fn();
+	});
 }
 
 /**
@@ -77,9 +92,9 @@ function mkdir(path, fn) {
  */
 
 function cp(src, dest, fn) {
-  ncp(src, dest, function(err) {
-    if (err) throw err;
-    console.log('   \033[36mcreate\033[0m : ' + dest);
-    fn && fn();
-  });
+	ncp(src, dest, function(err) {
+		if (err) throw err;
+		console.log('   \033[36mcreate\033[0m : ' + dest);
+		fn && fn();
+	});
 }

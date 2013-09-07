@@ -1,7 +1,7 @@
 {
   "name": "grunt-piece-modulejs",
   "description": "generate modulejs file",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/yezhiming/piece",
   "author": {
     "name": "juno5460",

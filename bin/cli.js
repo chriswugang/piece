@@ -1,22 +1,22 @@
 #!/usr/bin/env node
 
-var program 	= require('commander'),
-		color 		= require('./clicolors'),
-		path      = require('path'),
-		pkg       = require('../package.json'),
-  	version   = pkg.version;
+var program = require('commander'),
+	color = require('./clicolors'),
+	path = require('path'),
+	pkg = require('../package.json'),
+	version = pkg.version;
 
-var ServerProgram	= require('./server');
-var ChromeProgram	= require('./chrome');
-var ScafflodProgram	= require('./scaffold');
+var ServerProgram = require('./server');
+var ChromeProgram = require('./chrome');
+var ScafflodProgram = require('./scaffold');
 
 program
 	.command('info')
 	.description('print framework info')
-	.action(function(){
+	.action(function() {
 		console.log(color.blue + 'piece.js v' + version + color.reset);
-	  console.log(color.blue + 'current path: %s' + color.reset, path.resolve('.'));
-	  console.log(color.blue + '    sdk path: %s' + color.reset, path.resolve(__dirname));
+		console.log(color.blue + 'current path: %s' + color.reset, path.resolve('.'));
+		console.log(color.blue + '    sdk path: %s' + color.reset, path.resolve(__dirname));
 	});
 
 //加载模块

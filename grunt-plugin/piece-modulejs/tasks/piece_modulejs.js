@@ -38,7 +38,7 @@ module.exports = function(grunt) {
             }
         });
 
-        moduleReturnContent = moduleReturnContent.substring(0, moduleReturnContent.length - 2) + "\n      }\n";
+        moduleReturnContent = moduleReturnContent.substring(0, moduleReturnContent.length - 2) + "\n      };\n";
         grunt.file.write(dirpath + "/" + "module.js", moduleHead + moduleRequireContent + moduleReturnContent + moduleEnd);
     }
 
