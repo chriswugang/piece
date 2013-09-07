@@ -36,10 +36,14 @@ function runServer() {
 
         //read recursively
         fs.readdir(path.resolve('.'), function(err, files){
-
+          //filter '.'
           files = _.reject(files, function(e){return e[0] == '.'});
+          //map to full paths
+          // files_full = _.map(files, function(e){return path.resolve('.', e)});
+          //add index page
+          // files_full.push(path.resolve(__dirname, '..', 'debug-server'));
 
-          console.log('copy modules: ' + files);
+          console.log('copy module folders: ' + files);
           async.each(files, function(item, callback){
             util.cp(path.resolve('.', item), path.resolve(debugTempPath, item), function(){
               callback(null);
