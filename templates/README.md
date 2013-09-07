@@ -1,1 +1,3 @@
-project file templates live in the folder ^_^
+before you run the project , please excute:
+
+$ sudu npm install -g grunt-cli
