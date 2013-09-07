@@ -5,7 +5,8 @@ var express     = require('express'),
 		async				= require('async'),
     AdmZip      = require('adm-zip'),
     rimraf      = require('rimraf')
-    util        = require('./util');
+    util        = require('./util'),
+    color       = require('./clicolors');
 
 module.exports = function(program){
 	program
@@ -86,7 +87,7 @@ function runServer() {
 
   app.listen(3000);
 
-  console.log('local ip address:');
+  console.log(color.blue + 'local ip address:' + color.reset);
   util.printIPAddress();
   console.log('piece.js Server Started, listening at 3000...');
 }
