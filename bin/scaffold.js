@@ -2,7 +2,8 @@ var mkdirp = require('mkdirp'),
 	path = require('path'),
 	fs = require('fs'),
 	ncp = require('ncp').ncp,
-	template = require('./template');
+	template = require('./template'),
+	color = require('./clicolors');
 
 module.exports = function(program) {
 
@@ -48,28 +49,45 @@ function createProject(name) {
 }
 
 function createModule(name) {
-	mkdir(path.resolve('.', name), function() {
-		template('portalview.html', path.resolve('.', name, 'index.html'), {
-			module: name,
-			view: 'index'
-		});
-		template('portalview.js', path.resolve('.', name, 'index.js'), {
-			module: name,
-			view: 'index'
-		});
-	});
+
+	fs.exists(path.resolve('.', 'piece'), function(exists) {
+		if (!exists) {
+			console.log(color.red + 'WARN: working folder is not a piece.js project, Abort.' + color.reset);
+			return;
+		}
+
+		mkdir(path.resolve('.', name), function() {
+			template('portalview.html', path.resolve('.', name, 'index.html'), {
+				module: name,
+				view: 'index'
+			});
+			template('portalview.js', path.resolve('.', name, 'index.js'), {
+				module: name,
+				view: 'index'
+			});
+		}); //mkdir
+
+	}); //exists
 }
 
 function createView(name, view) {
 
-	template('view.html', path.resolve('.', name, view + '.html'), {
-		module: name,
-		view: view
-	});
-	template('view.js', path.resolve('.', name, view + '.js'), {
-		module: name,
-		view: view
-	});
+	fs.exists(path.resolve('.', 'piece'), function(exists) {
+		if (!exists) {
+			console.log(color.red + 'WARN: working folder is not a piece.js project, Abort.' + color.reset);
+			return;
+		}
+
+		template('view.html', path.resolve('.', name, view + '.html'), {
+			module: name,
+			view: view
+		});
+		template('view.js', path.resolve('.', name, view + '.js'), {
+			module: name,
+			view: view
+		});
+
+	}); //exists
 }
 
 /**
