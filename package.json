@@ -6,6 +6,11 @@
     "name": "Justin Yip",
     "email": "justin.yip@foxmail.com"
   },
+  "contributors": [
+    {
+      "name": "juno leung"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/yezhiming/piece.git"
