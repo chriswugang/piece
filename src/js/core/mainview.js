@@ -19,6 +19,9 @@ define(['backbone', 'underscore'], function(Backbone, _) {
       var pageEl = newView.render().el;
 
       if (this.currentView) this.currentView.remove();
+      //remove dom
+      $("body").html("");
+
       document.body.appendChild(pageEl);
       this.currentView = newView;
 
