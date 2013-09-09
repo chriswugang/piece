@@ -21,3 +21,4 @@ npm-debug.log
 src/.DS_Store
 
 .DS_Store
+.debug-tmp
