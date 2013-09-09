@@ -11,6 +11,9 @@ define(['backbone', 'underscore'], function(Backbone, _) {
     animated: false,
 
     changePage: function(newView, module) {
+      //remove dom
+      $("body").html("");
+
       if (module && !newView.module) newView.module = module;
 
       //inject self to the new view
@@ -19,8 +22,6 @@ define(['backbone', 'underscore'], function(Backbone, _) {
       var pageEl = newView.render().el;
 
       if (this.currentView) this.currentView.remove();
-      //remove dom
-      $("body").html("");
 
       document.body.appendChild(pageEl);
       this.currentView = newView;
