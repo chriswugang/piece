@@ -41,7 +41,7 @@ function runServer() {
         //read recursively
         fs.readdir(path.resolve('.'), function(err, files){
           //filter '.'
-          files = _.reject(files, function(e){return e[0] == '.' || e[0] == 'node_modules'});
+          files = _.reject(files, function(e){return e[0] == '.' || e == 'node_modules'});
           //map to full paths
           // files_full = _.map(files, function(e){return path.resolve('.', e)});
           //add index page
