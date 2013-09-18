@@ -21,6 +21,17 @@ define(['text!flight/listView.html'], function(listViewTemplate) {
             Piece.View.prototype.render.call(this);
 
             this.component('io').triggerChange();
+            var list = this.component('flightstatus-list');
+            console.info(list);
+            // list.setRequestParams({
+            //     'arrport': '',
+            //     'depport': 'depport',
+            //     'curpage': 1,
+            //     'pageSize': 8,
+            //     'ioroutport': 'io',
+            //     'timestamp': new Date().getTime()
+            // });
+            list.loadListByStoreData();
 
             return this;
         },
