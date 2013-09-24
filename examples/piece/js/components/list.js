@@ -70,6 +70,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
                 //iScroll
                 if (this.config.iScroll != 'false') {
+                    var isAutoTrigger = true;
                     var list_iScroll = new iScroll(this.el, {
                         onBeforeScrollStart: function(e) {
                             var target = e.target;
@@ -89,6 +90,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                             }
                         },
                         onScrollMove: function() {
+                            isAutoTrigger = false;
                             Cache.put("onScrollMove", "true");
                             pullUpEl = me.$('#pullUp')[0];
                             if (pullUpEl != null) {
@@ -138,10 +140,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                             }
                         },
                         onBeforeScrollEnd: function() {
-                            var CACHE_ID = 'cube-list-' + me.config['id'];
-                            Store.saveObject(CACHE_ID + "-scrollY", me.iScroll.y);
-
-
                             pullDownRefreshEl = me.$('#PullDownRefresh')[0];
 
                             if ((pullDownRefreshEl != null) && (this.options.topOffset == 0)) {
@@ -156,6 +154,13 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                         },
                         onScrollEnd: function() {
                             pullUpEl = me.$('#pullUp')[0];
+
+                            var CACHE_ID = 'cube-list-' + me.config['id'];
+                            if (!isAutoTrigger) {
+                                Store.saveObject(CACHE_ID + "-scrollY", me.iScroll.y);
+                                isAutoTrigger = true;
+                            }
+
                             if (pullUpEl != null) {
                                 pullUpOffset = pullUpEl.offsetHeight;
 
@@ -254,7 +259,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
             filterChildren: function(keyWord) {
                 var contentScroller = this.$(".contentScroller");
-                if (this.iScroll) this.iScroll.scrollTo(0, 0);
+                // if (this.iScroll) this.iScroll.scrollTo(0, 0);
                 if (keyWord) {
                     contentScroller.find("li[filter-keyword]").hide();
                     this.$('#' + this.config['id'] + ' li[filter-keyword*="' + keyWord.toLowerCase() + '"]').show();
@@ -377,7 +382,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 if (me.config.iScroll != 'false') {
 
                     $(window).trigger("resize");
-                    console.info(me.config);
                     me.iScroll.refresh();
                 }
             },
@@ -403,16 +407,15 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
             },
 
             loadListByStoreData: function() {
-                console.info("cube-list---list---从store加载数据");
+                console.log("cube-list---list---从store加载数据");
                 var CACHE_ID = 'cube-list-' + this.config['id'];
                 var listSoreData = Store.loadObject(CACHE_ID);
                 var tempConfig = Store.loadObject(CACHE_ID + "-config", tempConfig);
                 this.config = _.extend(this.config, tempConfig);
-                console.info(this.config);
                 this.loadListByJSONArray(listSoreData, true);
                 var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
                 // this.iScroll.scrollTo(0, -scrollY, 0, true);
-                console.info($(this.iScroll.scroller).css("-webkit-transform", "translate(0px, " + scrollY + "px)"));
+                $(this.iScroll.scroller).css("-webkit-transform", "translate(0px, " + scrollY + "px)");
                 this.iScroll.refresh();
             },
 
