@@ -138,6 +138,10 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                             }
                         },
                         onBeforeScrollEnd: function() {
+                            var CACHE_ID = 'cube-list-' + me.config['id'];
+                            Store.saveObject(CACHE_ID + "-scrollY", me.iScroll.y);
+
+
                             pullDownRefreshEl = me.$('#PullDownRefresh')[0];
 
                             if ((pullDownRefreshEl != null) && (this.options.topOffset == 0)) {
@@ -151,7 +155,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                             // 
                         },
                         onScrollEnd: function() {
-
                             pullUpEl = me.$('#pullUp')[0];
                             if (pullUpEl != null) {
                                 pullUpOffset = pullUpEl.offsetHeight;
@@ -407,13 +410,17 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 this.config = _.extend(this.config, tempConfig);
                 console.info(this.config);
                 this.loadListByJSONArray(listSoreData, true);
-                console.info(listSoreData);
+                var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
+                // this.iScroll.scrollTo(0, -scrollY, 0, true);
+                console.info($(this.iScroll.scroller).css("-webkit-transform", "translate(0px, " + scrollY + "px)"));
+                this.iScroll.refresh();
             },
 
             cleanStoreListData: function() {
                 var CACHE_ID = 'cube-list-' + this.config['id'];
                 Store.deleteObject(CACHE_ID);
                 Store.deleteObject(CACHE_ID + "-config");
+                Store.deleteObject(CACHE_ID + "-scrollY");
             },
 
             clearList: function() {
