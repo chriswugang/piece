@@ -1,16 +1,14 @@
 {
   "name": "piece",
   "description": "Piece HTML5 Framework for Mobile",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "author": {
     "name": "Justin Yip",
     "email": "justin.yip@foxmail.com"
   },
-  "contributors": [
-    {
-      "name": "juno leung"
-    }
-  ],
+  "contributors": [{
+    "name": "juno leung"
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/yezhiming/piece.git"

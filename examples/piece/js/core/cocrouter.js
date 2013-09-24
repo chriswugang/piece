@@ -12,9 +12,9 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 				'': 'index',
 				//eg: index.html#com.foss.demo/listView
 				//eg: index.html#com.foss.demo/listView?t=push
-				"*module/*page(?t=:timestamp)": "modularRoute",
+				"*module/*page(?*param)": "modularRoute",
 				//eg: index.html#listView
-				"*page(?t=:timestamp)": "pageRoute"
+				"*page(?t=:param)": "pageRoute"
 			},
 
 			initialize: function(options) {
@@ -88,9 +88,9 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 				});
 			},
 
-			modularRoute: function(module, view, timestamp) {
+			modularRoute: function(module, view, param) {
 
-				console.info("cube---cocrouter---modularRoute--" + module + '/' + view + '/' + timestamp);
+				console.info("cube---cocrouter---modularRoute--" + module + '/' + view + '/' + param);
 
 				var me = this;
 
@@ -104,9 +104,9 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 
 				//判断是否存在
 
-				// if (!timestamp) {
-				// 	url_path = require_path + '?t=' + Util.generateTimeStamp();
-				// 	//如果时间戳为空、可被表示为新开页面，为url加上timestamp，存入栈，并且push
+				// if (!param) {
+				// 	url_path = require_path + '?t=' + Util.generateparam();
+				// 	//如果时间戳为空、可被表示为新开页面，为url加上param，存入栈，并且push
 				// 	Backbone.history.navigate(url_path, {
 				// 		trigger: false,
 				// 		replace: true
@@ -124,7 +124,7 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 				// 	}
 
 				// } else {
-				// 	url_path = require_path + '?t=' + timestamp;
+				// 	url_path = require_path + '?t=' + param;
 				// 	//如果访问过，则进行
 				// 	var url_index = _.indexOf(this.urls, url_path);
 				// 	if (url_index > -1) {
@@ -219,7 +219,7 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 				}
 			},
 
-			pageRoute: function(page, timestamp) {
+			pageRoute: function(page, param) {
 				console.log('page route to:' + page);
 			}
 
