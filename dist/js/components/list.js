@@ -289,7 +289,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                         var li = $("<li/>");
                         li.addClass('cube-list-item-more-record');
                         li.html('无相关记录');
-                        li.appendTo(me.el.querySelector('.contentScroller .item-content'));
+                        li.appendTo(me.el.querySelector('.contentScroller'));
                         $('#pullUp').remove();
                         console.log("cube---list---list: 没有数据");
                     }
@@ -352,7 +352,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
                     if (_itemTemplateName) li.append(_.template(templateStr, item));
                     //TODO: 需要重构
-                    li.appendTo(me.el.querySelector('.contentScroller .item-content'));
+                    li.appendTo(me.el.querySelector('.contentScroller'));
                 }
 
                 //更多按钮
@@ -367,7 +367,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     //TODO: 需要重构
                     moreLi.appendTo(me.el.querySelector('.contentScroller'));
 
-                    var pullUpText = "<div class='' id='pullUp'><span class='pullUpIcon'></span><span class='pullUpLabel'>Pull up to load more...</span></div>";
+                    var pullUpText = "<li class='' id='pullUp'><span class='pullUpIcon'></span><span class='pullUpLabel'>Pull up to load more...</span></li>";
                     var defalutMoreItemDiv = $(pullUpText);
                     moreLi.append(defalutMoreItemDiv);
                 } else if (paging !== undefined) {
@@ -375,7 +375,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     li.addClass('cube-list-item-more-record');
                     li.html('无更多相关记录');
                     $('#pullUp').remove();
-                    li.appendTo(me.el.querySelector('.contentScroller .item-content'));
+                    li.appendTo(me.el.querySelector('.contentScroller'));
                 }
                 me.trigger("drawed", me, jsonArray);
                 // me.config.page = me.config.page + 1;
@@ -429,10 +429,9 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
             clearList: function() {
                 //clear list
                 var contentScroller = this.$(".contentScroller");
-                var content_holder = contentScroller.find('.item-content');
 
                 if (this.config['page'] == 1) {
-                    content_holder.find("li").remove();
+                    contentScroller.find("li").not("#PullDownRefresh").remove();
                 }
                 // this.cleanStoreListData();
             },
@@ -573,20 +572,12 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     var pullDownRefreshDiv;
                     if (config.isPullDownRefresh == 'true') {
                         //var background-image=
-                        pullDownRefreshDiv = document.createElement('div');
+                        pullDownRefreshDiv = document.createElement('li');
                         $(pullDownRefreshDiv).attr('id', 'PullDownRefresh');
                         $(pullDownRefreshDiv).attr('style', 'height: 40px;');
                         $(pullDownRefreshDiv).append('<span id="pullDownRefreshIconWarp"><span id="pullDownRefreshIcon"></span></span><span id="pullDownRefreshLable">Pull down to refresh...</span>');
 
-                        // $(pullDownRefreshDiv).addClass('pullDownFlip');
-                        // $(list_el).prepend(pullDownRefreshDiv);
-                        // $(listContainer).appendChild(pullDownRefreshDiv);
                     }
-
-                    //item容器（方便在header和footer之间找到正确位置插入数据行）
-                    var content_el = document.createElement('div');
-                    this.$(content_el).addClass('item-content');
-                    scroller_el.appendChild(content_el);
 
                     $(list_el).wrap(listContainer);
                     $(list_el).find("div ul").prepend(pullDownRefreshDiv);
@@ -636,7 +627,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
                     var list = new List(config);
 
-                    // $(list_el).refresh({ready:function(){}})；
                     Cache.put(config.id + 'Onload', 0);
 
 
