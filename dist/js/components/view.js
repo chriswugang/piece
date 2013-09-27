@@ -131,6 +131,10 @@ define(['zepto', 'underscore', 'backbone', 'components/list', 'components/segmen
                 Backbone.history.navigate(fragment, options);
             },
 
+            navigateModule: function(fragment, options) {
+                Backbone.history.navigate(fragment, options);
+            },
+
             _modularFragment: function(fragment) {
                 /*modular support*/
                 //this is a modular view(depends on the router), and the navigation path not start with slash,
