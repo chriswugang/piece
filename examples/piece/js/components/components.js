@@ -20,6 +20,8 @@ define(function(require) {
   var v33 = require('components/validator');
   var v34 = require('components/view');
   var v35 = require('components/datepicker');
+  var v36 = require('components/toast');
+
   return {
     'Base64Img': v1,
     'Cache': v2,
@@ -41,6 +43,8 @@ define(function(require) {
     'Util': v32,
     'Validator': v33,
     'View': v34,
-    'Datepicker': v35
+    'Datepicker': v35,
+    'Toast': v36
+    
   };
 });

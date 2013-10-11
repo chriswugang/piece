@@ -1,4 +1,4 @@
-define(['zepto', 'backbone', 'gmu'], function($, Backbone, gmu) {
+define(['zepto', 'backbone', 'iScroll'], function($, Backbone, iScroll) {
 
 	var ModulePanel = Backbone.View.extend({
 

@@ -10,6 +10,7 @@ require.config({
 		backbone: 'src/js/vendor/backbone/js/backbone',
 		fastclick: 'src/js/vendor/fastclick/js/fastclick',
 		canvasloader: 'src/js/components/canvasloader',
+		iScroll: 'src/js/vendor/iscroll/js/iscroll-lite',
 
 		gmu: 'src/js/components/gmu',
 
@@ -23,6 +24,9 @@ require.config({
 		backbone: {
 			deps: ['underscore'],
 			exports: 'Backbone'
+		},
+		iScroll: {
+			exports: 'iScroll'
 		},
 		zepto: {
 			exports: '$'

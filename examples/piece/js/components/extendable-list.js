@@ -6,7 +6,7 @@
  * </div>
  *
  */
-define(['zepto', 'underscore', 'components/loader', 'components/cache', 'gmu', 'backbone', 'components/list'], function($, _, Loader, Cache, gmu, Backbone, List) {
+define(['zepto', 'underscore', 'components/loader', 'components/cache', 'iScroll', 'backbone', 'components/list'], function($, _, Loader, Cache, iScroll, Backbone, List) {
 
     var elContext;
     var ExtendableList = List.extend({

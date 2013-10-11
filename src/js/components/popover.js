@@ -1,5 +1,5 @@
 
-define(['zepto', 'backbone', 'gmu', 'components/fixed'], function($, Backbone, gmu, Fixed) {
+define(['zepto', 'backbone', 'iScroll', 'components/fixed'], function($, Backbone, iScroll, Fixed) {
 
 	var Popover = Backbone.View.extend({
 

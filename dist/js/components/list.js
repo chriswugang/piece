@@ -6,8 +6,8 @@
  * </div>
  *
  */
-define(['zepto', 'underscore', 'components/loader', 'components/cache', 'components/store', 'gmu', 'backbone'],
-    function($, _, Loader, Cache, Store, gmu, Backbone) {
+define(['zepto', 'underscore', 'components/loader', 'components/cache', 'components/store', 'iScroll', 'backbone'],
+    function($, _, Loader, Cache, Store, iScroll, Backbone) {
 
         var List = Backbone.View.extend({
 
@@ -122,8 +122,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                                     $(pullDownRefreshEl).find('#pullDownRefreshLable').text('Release to reload...');
                                     $(me.$('#pullDownRefreshIconWarp')[0]).addClass('pullDownFlip180');
 
-
-
                                 } else if ((this.y < pullDownRefreshHeight) && (this.options.topOffset == 0)) {
                                     this.options.topOffset = parseInt($(pullDownRefreshEl).css('height'));
                                     $(pullDownRefreshEl).find('#pullDownRefreshIcon').removeClass('pullDownOut').addClass('pullDownIn');
@@ -133,7 +131,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
                                 } else if (this.y > 0) {
                                     Cache.put("onScrollMove", "false");
-
                                 }
 
 
@@ -162,8 +159,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                             }
 
                             if (pullUpEl != null) {
-                                pullUpOffset = pullUpEl.offsetHeight;
-
                                 if (pullUpEl.className.match('flip')) {
                                     pullUpEl.className = 'loading';
                                     pullUpEl.querySelector('.pullUpLabel').innerHTML = 'Loading...';
@@ -174,6 +169,9 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                                 }
                             }
 
+                            //如果上面下拉按钮出现，但是没有刷新。恢复初始位置
+                            me.resetPullDownPos();
+
                             pullDownRefreshEl = me.$('#PullDownRefresh')[0];
                             if ((pullDownRefreshEl != null) && (this.options.topOffset == 0)) {
                                 var that = this;
@@ -181,6 +179,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                                 $(pullDownRefreshEl).find('#pullDownRefreshIcon').attr({
                                     'class': 'pullDownOut'
                                 });
+
+                                me.resetPullDownPos();
 
                                 me.reload(function() {
                                     Cache.put("onScrollMove", "false");
@@ -353,6 +353,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     if (_itemTemplateName) li.append(_.template(templateStr, item));
                     //TODO: 需要重构
                     li.appendTo(me.el.querySelector('.contentScroller'));
+
                 }
 
                 //更多按钮
@@ -394,6 +395,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 tempConfig['elContext'] = null;
                 // Store.saveObject(CACHE_ID + "-iscroll", this.iScroll);
                 Store.saveObject(CACHE_ID + "-config", tempConfig);
+                Store.saveObject(CACHE_ID + "-params", this.requestParams);
                 var listStore = [];
                 // 把当前list的数据保存起来，方便以后直接拿出来。
                 if (Store.loadObject(CACHE_ID) === null) {
@@ -410,12 +412,20 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 console.log("cube-list---list---从store加载数据");
                 var CACHE_ID = 'cube-list-' + this.config['id'];
                 var listSoreData = Store.loadObject(CACHE_ID);
-                var tempConfig = Store.loadObject(CACHE_ID + "-config", tempConfig);
+                var tempConfig = Store.loadObject(CACHE_ID + "-config");
                 this.config = _.extend(this.config, tempConfig);
+
+                var tempparams = Store.loadObject(CACHE_ID + "-params");
+                this.requestParams = _.extend(this.requestParams, tempparams);
+
                 this.loadListByJSONArray(listSoreData, true);
                 var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
-                // this.iScroll.scrollTo(0, -scrollY, 0, true);
-                $(this.iScroll.scroller).css("-webkit-transform", "translate(0px, " + scrollY + "px)");
+                // this.iScroll.scrollTo(0, scrollY);
+                $(this.iScroll.scroller).css({
+                    "-webkit-transform": "translate(0px, " + scrollY + "px)",
+                    "transform": "translate(0px, " + scrollY + "px)"
+                });
+                this.resetPullDownPos(scrollY);
                 this.iScroll.refresh();
             },
 
@@ -434,6 +444,23 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     contentScroller.find("li").not("#PullDownRefresh").remove();
                 }
                 // this.cleanStoreListData();
+            },
+
+            resetPullDownPos: function(scrollY) {
+                if (scrollY < 0) {
+                    scrollY = -scrollY;
+                }
+                if (this.iScroll !== null) {
+                    if (scrollY >= 40) {
+                        return;
+                    }
+                    if (this.iScroll.y <= 40 && this.iScroll.y >= 0) {
+                        $(this.iScroll.scroller).css({
+                            "-webkit-transform": "translate(0px, " + -40 + "px)",
+                            "transform": "translate(0px, " + -40 + "px)"
+                        });
+                    }
+                }
             },
 
             loadNextPage: function(callback) {
@@ -507,6 +534,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                         me.trigger("loaded", me, data);
                         loader.hide();
                         console.log('cube---list---list:load and draw  end');
+
+                        me.resetPullDownPos();
 
                     },
                     error: function(e, xhr, type) {
