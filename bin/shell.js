@@ -7,6 +7,8 @@ var fs = require('fs');
 // console.log('__dirname: ' + __dirname);
 // console.log('.: ' + path.resolve('.'));
 
+console.log(process.pid);
+
 // Initialization
 var app = new shell( { /*chdir: __dirname,*/ prompt: "Piece.js" + " $ " } );
 
@@ -50,10 +52,15 @@ if (app.isPieceProject()) {
 }
 
 var ScafflodShell = require('./shell_scaffold');
+var ChromeShell = require('./shell_chrome');
+var ServerShell = require('./shell_server');
 
 ScafflodShell(app);
+ChromeShell(app);
+ServerShell(app);
 
 // Event notification
 app.on('quit', function(){
-    app.client.quit();
+  ServerShell.quit();
+  app.styles.cyan("bye~" + process.pid).ln();
 });
