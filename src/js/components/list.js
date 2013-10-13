@@ -284,7 +284,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     me.clearList();
                 }
 
-                if (jsonArray === null || jsonArray.length === 0) {
+                if (jsonArray === undefined || jsonArray === null || jsonArray.length === 0) {
                     if (me.$('.cube-list-item-more-record').length === 0) {
                         var li = $("<li/>");
                         li.addClass('cube-list-item-more-record');
@@ -519,9 +519,6 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                         //编译模板
                         var templateStr;
                         if (_itemTemplateName) templateStr = this.$("#" + _itemTemplateName).html();
-
-                        //append
-                        console.log("cube---list---" + jsonRoot.length + ' records in total');
 
                         me.loadListByJSONArray(jsonRoot);
 
