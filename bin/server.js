@@ -20,12 +20,12 @@ function runServer() {
   // app.use(express.cookieParser('secret-piece-js'));
   // app.use(express.cookieSession());
   app.use(express.static(path.resolve('.')));
-  // app.use(express.static(path.resolve(__dirname, '..', 'debug-server')));
+  app.use(express.static(path.resolve(__dirname, '..', 'debug-server')));
   
   //index page
-  // app.get('/', function(req, res){
-  // 	res.redirect('index.html');
-  // });
+  app.get('/', function(req, res){
+  	res.redirect('index.html');
+  });
 
   app.get('/app.zip', function(req, res){
     var debugTempPath = path.resolve('.', '.debug-tmp');

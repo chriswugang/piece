@@ -11,5 +11,5 @@ module.exports = function(src, dest, data){
 	//compile
 	var template = Handlebars.compile(fileData);
 	//write
-    fs.writeFileSync(dest, template(data), {encoding: 'utf-8'});
+  fs.writeFileSync(dest, template(data), {encoding: 'utf-8'});
 }

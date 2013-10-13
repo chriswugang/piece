@@ -20,6 +20,7 @@
     "url": "https://github.com/yezhiming/piece/issues"
   },
   "dependencies": {
+    "shell": "0.3.2",
     "handlebars": "*",
     "express": "*",
     "mkdirp": "~0.3.4",
