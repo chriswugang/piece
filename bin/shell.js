@@ -3,6 +3,9 @@
 var shell = require('shell');
 var path = require('path');
 var fs = require('fs');
+var util = require('./shell_util');
+var pkg = require('../package.json'),
+    version = pkg.version;
 
 // console.log('__dirname: ' + __dirname);
 // console.log('.: ' + path.resolve('.'));
@@ -58,6 +61,14 @@ var ServerShell = require('./shell_server');
 ScafflodShell(app);
 ChromeShell(app);
 ServerShell(app);
+
+app.cmd('info', 'print env info', function(req, res){
+  res.cyan('piece.js v' + version).ln();
+  res.cyan('current path: ' + path.resolve('.')).ln();
+  res.cyan('    sdk path: ' + path.resolve(__dirname)).ln();
+  util.printIPAddress(res);
+  res.prompt();
+});
 
 // Event notification
 app.on('quit', function(){
