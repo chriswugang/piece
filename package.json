@@ -14,7 +14,7 @@
     "url": "https://github.com/yezhiming/piece.git"
   },
   "bin": {
-    "piece": "./bin/cli.js"
+    "piece": "./bin/shell.js"
   },
   "bugs": {
     "url": "https://github.com/yezhiming/piece/issues"
