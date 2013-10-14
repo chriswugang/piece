@@ -4,14 +4,14 @@ var server_process;
 
 module.exports = function(app) {
 
-	app.cmd('server start', 'run a http server at port 3000', function(req, res, next){
+	app.cmd('server start', 'run piece server at port 3000', function(req, res, next){
 
 		server_process = cp.fork(__dirname + '/cp_server.js');
 
 		res.prompt();
 	});
 
-	app.cmd('server stop', '', function(req, res, next){
+	app.cmd('server stop', 'stop the piece server', function(req, res, next){
 		if (server_process) {
 			module.exports.quit();
 		} else {
@@ -21,7 +21,7 @@ module.exports = function(app) {
 		res.prompt();
 	});
 
-	app.cmd('server status', '', function(req, res, next){
+	app.cmd('server status', 'check the status of piece server', function(req, res, next){
 		if (server_process) {
 			res.cyan('piece server is running').ln();
 		} else {
