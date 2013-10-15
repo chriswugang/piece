@@ -31,7 +31,7 @@ module.exports = function(app) {
 
 			//copy framework from sdk to project folder
 			cp(path.resolve(__dirname, '..', 'dist'), path.resolve(app_fullpath, 'piece'), function() {
-				res.ln().magenta('['+ name +'] created.').ln();
+				// res.ln().magenta('['+ name +'] created.').ln();
 				process.chdir(name);
 				app.settings.prompt = "[" + name + "] $ ";
 				res.prompt();
