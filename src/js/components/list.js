@@ -363,7 +363,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 if (moreEl) this.$(moreEl).remove();
 
                 //判断页数决定是否显示更多按钮
-                if (paging == 'true' && (jsonArray.length % me.config['pageSize']) === 0) {
+                if (paging == 'true' && (jsonArray.length >= me.config['pageSize'])) {
                     //加上一个加载更多的cell
                     var moreLi = $("<li/>");
                     moreLi.addClass('cube-list-item-more');
@@ -436,6 +436,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     this.requestParams = _.extend(this.requestParams, tempparams);
                 }
                 console.info(this.requestParams);
+
                 this.loadListByJSONArray(listSoreData, true);
                 var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
                 // this.iScroll.scrollTo(0, scrollY);
