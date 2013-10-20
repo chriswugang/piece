@@ -252,9 +252,11 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 this.loadNextPage(callback);
             },
 
-            setRequestParams: function(params) {
+            setRequestParams: function(params, isAutoload) {
                 this.requestParams = _.extend(this.requestParams, params);
-                this.reload();
+                if (isAutoload === undefined || isAutoload === null || isAutoload === true) {
+                    this.reload();
+                }
             },
 
             filterChildren: function(keyWord) {
@@ -408,16 +410,32 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 }
             },
 
-            loadListByStoreData: function() {
+            isExistStoreData: function(listName) {
+                if (window.localStorage["cube-list-" + listName] === undefined || window.localStorage["cube-list-" + listName] === null) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+
+            //临时处理url变更问题
+            loadListByStoreData: function(url, params) {
                 console.log("cube-list---list---从store加载数据");
                 var CACHE_ID = 'cube-list-' + this.config['id'];
                 var listSoreData = Store.loadObject(CACHE_ID);
                 var tempConfig = Store.loadObject(CACHE_ID + "-config");
                 this.config = _.extend(this.config, tempConfig);
-
+                if (url) {
+                    this.config.url = url;
+                }
                 var tempparams = Store.loadObject(CACHE_ID + "-params");
-                this.requestParams = _.extend(this.requestParams, tempparams);
-
+                if (params) {
+                    params = _.extend(params, tempparams);
+                    this.requestParams = _.extend(this.requestParams, params);
+                } else {
+                    this.requestParams = _.extend(this.requestParams, tempparams);
+                }
+                console.info(this.requestParams);
                 this.loadListByJSONArray(listSoreData, true);
                 var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
                 // this.iScroll.scrollTo(0, scrollY);
@@ -433,6 +451,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 var CACHE_ID = 'cube-list-' + this.config['id'];
                 Store.deleteObject(CACHE_ID);
                 Store.deleteObject(CACHE_ID + "-config");
+                Store.deleteObject(CACHE_ID + "-params");
                 Store.deleteObject(CACHE_ID + "-scrollY");
             },
 
