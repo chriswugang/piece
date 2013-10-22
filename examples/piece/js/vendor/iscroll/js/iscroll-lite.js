@@ -301,7 +301,7 @@ iScroll.prototype = {
 						e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
 						0, null);
 					ev._fake = true;
-					target.dispatchEvent(ev);
+					// target.dispatchEvent(ev);
 				}
 			}
 
