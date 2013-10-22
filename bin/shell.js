@@ -21,9 +21,9 @@ app.configure(function() {
         // app.client = require('redis').createClient()
         next();
     });
-    app.use(shell.history({
-        shell: app
-    }));
+    // app.use(shell.history({
+    //     shell: app
+    // }));
     app.use(shell.completer({
         shell: app
     }));
