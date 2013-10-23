@@ -62,6 +62,10 @@ ScafflodShell(app);
 ChromeShell(app);
 ServerShell(app);
 
+app.cmd('update piece', 'update piece framework', function(req, res){
+  
+});
+
 app.cmd('info', 'print env info', function(req, res){
   res.cyan('piece.js v' + version).ln();
   res.cyan('current path: ' + path.resolve('.')).ln();

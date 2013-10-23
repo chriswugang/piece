@@ -1,21 +1,37 @@
 <!doctype html>
 <html ng-app>
   <head>
+  	<title></title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <meta name="viewport" content="initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	  <meta name="apple-mobile-web-app-capable" content="yes">
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	  <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+
+	  <meta http-equiv="X-Frame-Options" content="ALLOW-FROM">
+	  <meta http-equiv="pragma" content="no-cache" />
+	
+		<link rel="stylesheet" href="piece/css/piece.css">
+
     <script src="angular.min.js"></script>
-    <script src="module.js"></script>
+    <script src="application.js"></script>
   </head>
   <body>
 
-		<div ng-controller="ModulesCtrl">
-			[ <a href="" ng-click="click()">Click Test</a> ]
-	    <ul>
-	    	<li ng-repeat="module in modules">
-	    		<div>{{module.name}}</div>
-	    		<div>{{module.version}}</div>
-	    		<button ng-click="update(module.name)">Update</button>
+  	<header class="bar-title">
+	    <h1 class="title">Hello Piece.js!</h1>
+	  </header>
+
+	  <div class="content" ng-controller="AppCtrl">
+			<!--[ <a href="" ng-click="click()">Click Test</a> ]-->
+	    <ul class="list inset">
+	    	<li ng-repeat="module in modules" ng-click="navigate(module.name)">
+	    			<h2>{{module.name}}</h2>
+	    			<div>{{module.version}}</div>
+	    		<!--<button ng-click="update(module.name)">Update</button>-->
 	    	</li>
 	    </ul>
-    </div>
+	  </div>
 
   </body>
 </html>

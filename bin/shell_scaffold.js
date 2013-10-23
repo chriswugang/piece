@@ -68,6 +68,9 @@ module.exports = function(app) {
 				module: name,
 				view: 'index'
 			});
+			template('module_package.json', path.resolve('.', name, 'package.json'), {
+				name: name
+			});
 
 			res.prompt();
 		}); //mkdir

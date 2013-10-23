@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var express     = require('express'),
 		path        = require('path'),
 		fs					= require('fs')
@@ -61,23 +63,37 @@ app.get('/app.zip', function(req, res){
   });//rimraf
 });
 
-//
-// app.get('/packages.json', function(req, res){
-// 	fs.readdir(path.resolve('.'), function(err, files){
-// 		if (err) {throw err};
-		
-// 		files = _.reject(files, function(e){return e[0] == '.' });
-// 		configs = _.map(files, function(e){return path.resolve('.', e, 'package.json')});
-// 		async.map(configs, fs.readFile, function(err, results){
-// 			if (err) {throw err};
-// 			res.send(_.map(results, function(e){
-// 				return JSON.parse(e);
-// 			}));
-// 		});
 
-// 		// res.send(_.object(files, values));
-// 	});
-// });
+app.get('/application.json', function(req, res){
+	fs.readdir(path.resolve('.'), function(err, files){
+		if (err) {throw err};
+		
+    //remove .
+		files = _.reject(files, function(e){return e[0] == '.' });
+    //we only take direcotry(module)
+    files = _.filter(files, function(e){
+      return fs.existsSync(path.resolve('.', e, 'package.json')) 
+      //deprecated
+      || fs.existsSync(path.resolve('.', e, 'CubeModule.json'))
+      && fs.statSync(path.resolve('.', e)).isDirectory();
+    });
+
+		configs = _.map(files, function(e){ return path.resolve('.', e, 'package.json'); });
+
+		async.map(configs, fs.readFile, function(err, results){
+			if (err) {throw err};
+
+      var arr = _.map(results, function(e){
+        return JSON.parse(e);
+      });
+			res.send({
+        "modules": arr
+      });
+		});
+
+		// res.send(_.object(files, values));
+	});
+});
 
 app.listen(3000);
 
