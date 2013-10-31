@@ -10,7 +10,7 @@ var pkg = require('../package.json'),
 // console.log('__dirname: ' + __dirname);
 // console.log('.: ' + path.resolve('.'));
 
-console.log(process.pid);
+// console.log(process.pid);
 
 // Initialization
 var app = new shell( { /*chdir: __dirname,*/ prompt: "Piece.js" + " $ " } );
@@ -76,6 +76,8 @@ app.cmd('info', 'print env info', function(req, res){
 
 // Event notification
 app.on('quit', function(){
-  ServerShell.quit();
-  app.styles.cyan("bye~" + process.pid).ln();
+  if (app.isShell) {
+    ServerShell.quit();
+    app.styles.cyan("bye~" + process.pid).ln();
+  };
 });
