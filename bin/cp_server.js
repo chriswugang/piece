@@ -95,6 +95,10 @@ app.get('/application.json', function(req, res){
 	});
 });
 
+app.get('/docs', function(req, res){
+
+});
+
 app.listen(3000);
 
 console.log(color.blue + 'local ip address:' + color.reset);
