@@ -21,21 +21,22 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
         },
 
         render: function() {
+            listViewTemplate = "";
 
             $(this.el).html(listViewTemplate);
 
             Piece.View.prototype.render.call(this);
 
-            this.component('io').triggerChange();
+            // this.component('io').triggerChange();
 
             return this;
         },
         
         onShow: function() {
             // alert("..");
-            $("body").click(function(){
-                alert("=.=");
-            });
+            // $("body").click(function(){
+            //     alert("=.=");
+            // });
         },
 
         onItemSelect: function(list, data) {
