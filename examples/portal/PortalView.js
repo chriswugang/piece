@@ -24,7 +24,7 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         render: function() {
             // listViewTemplate = "";
-            $(this.el).html(listViewTemplate);
+            // $(this.el).html(listViewTemplate);
             Piece.View.prototype.render.call(this);
             return this;
         },
