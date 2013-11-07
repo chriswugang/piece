@@ -6,25 +6,24 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         type: 'portal',
 
-        el: ".page",
+        el: "body",
 
         events: {
             "click #querymore": "queryMore",
             "click #refresh": "reload",
-            'click body': 'sayHello'
         },
 
         bindings: {
             "Segment:change io": "onIOChange",
             "List:select flightstatus-list": "onItemSelect"
         },
-        sayHello: function() {
-            alert("hello");
-        },
 
         render: function() {
-            // listViewTemplate = "";
-            // $(this.el).html(listViewTemplate);
+            if (listViewTemplate.indexOf("<body") > -1) {
+                listViewTemplate = listViewTemplate.substring(listViewTemplate.indexOf("<body") + 5, listViewTemplate.indexOf("</body>"));
+                listViewTemplate = listViewTemplate.substring(listViewTemplate.indexOf(">") + 1, listViewTemplate.length);
+            }
+            $(this.el).html(listViewTemplate);
             Piece.View.prototype.render.call(this);
             return this;
         },
@@ -53,7 +52,9 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         queryMore: function() {
             console.info(this.container);
-            alert("navigate");
+            this.navigate("detailView", {
+                trigger: true
+            });
         },
 
         reload: function() {
