@@ -14,9 +14,9 @@
   <link href="../piece/css/piece.css" rel="stylesheet"/>
 
   <script type="text/javascript">
-      var require = {
-          urlArgs: "bust=" +  (new Date()).getTime()
-      };
+      // var require = {
+      //     urlArgs: "bust=" +  (new Date()).getTime()
+      // };
       var pieceConfig ={
           defaultModule:"portal",
           defaultView:"PortalView" 
@@ -27,21 +27,23 @@
 
 </head>
 <body>
-  <header class="bar-title">
-    <a id="refresh" class="button">返回</a>
-    <h1 class="title">航班动态</h1>
-    <a id="querymore" class="button">更多查询</a>
-  </header>
-  <nav class="bar-standard bar-header-secondary">
-    <ul id="io" class="segmented-controller">
-      <li class="active" data-value="out">
-        <a href="#">出港</a>
-      </li>
-      <li data-value="in">
-        <a href="#">进港</a>
-      </li>
-    </ul>
-  </nav>
-  <div class="content">hello world !</div>
+  <div class="page">
+    <header class="bar-title">
+      <a id="refresh" class="button">返回</a>
+      <h1 class="title">航班动态</h1>
+      <a id="querymore" class="button">更多查询</a>
+    </header>
+    <nav class="bar-standard bar-header-secondary">
+      <ul id="io" class="segmented-controller">
+        <li class="active" data-value="out">
+          <a href="#">出港</a>
+        </li>
+        <li data-value="in">
+          <a href="#">进港</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="content">hello world !</div>
+  </div>
 </body>
 </html>

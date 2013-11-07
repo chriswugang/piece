@@ -6,6 +6,8 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         type: 'portal',
 
+        el: ".page",
+
         events: {
             "click #querymore": "queryMore",
             "click #refresh": "reload",
@@ -21,21 +23,17 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
         },
 
         render: function() {
-
-            $(this.el).html(listViewTemplate);
-
+            // listViewTemplate = "";
+            // $(this.el).html(listViewTemplate);
             Piece.View.prototype.render.call(this);
-
-            this.component('io').triggerChange();
-
             return this;
         },
-        
+
         onShow: function() {
             // alert("..");
-            $("body").click(function(){
-                alert("=.=");
-            });
+            // $("body").click(function(){
+            //     alert("=.=");
+            // });
         },
 
         onItemSelect: function(list, data) {
@@ -55,16 +53,13 @@ define(['text!portal/PortalView.html'], function(listViewTemplate) {
 
         queryMore: function() {
             console.info(this.container);
-            this.container.navigateForResult('/examples/selectView', {
-                trigger: true
-            }, '/examples/listView', this.onGotResult);
+            alert("navigate");
         },
 
         reload: function() {
             console.info(this.container);
-            this.container.navigateForResult('/examples/demoIndex', {
-                trigger: true
-            }, '/examples/dialog', this.onGotResult);
+            alert("reload");
+
         }
     });
 
