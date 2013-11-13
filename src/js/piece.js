@@ -49,6 +49,21 @@ requirejs.config({
 	}
 });
 (function() {
+
+	//navigation api(web)
+	window.Navigation = window.navigation || {};
+	window.Navigation.navigate = function(fragment, options) {
+		options = options || {
+			trigger: true
+		};
+		Backbone.history.navigate(fragment, options);
+	};
+
+	window.Navigation.href = function(href) {
+		window.location.href = href;
+		//TODO: open new tab/window mode?
+	};
+
 	//load phonegap js
 	if (pieceConfig.enablePhoneGap) {
 		var phonegapjs = document.createElement('script');
