@@ -50,18 +50,21 @@ requirejs.config({
 });
 (function() {
 
-	//navigation api(web)
+	//navigation api(web), will be replace 
 	window.Navigation = window.navigation || {};
 	window.Navigation.navigate = function(fragment, options) {
-		options = options || {
-			trigger: true
-		};
+		options = options || {trigger: true};
 		Backbone.history.navigate(fragment, options);
 	};
-
+	//delegate to window.location
 	window.Navigation.href = function(href) {
 		window.location.href = href;
 		//TODO: open new tab/window mode?
+	};
+	//delegate to backbone history navigate
+	window.Navigation.backboneNavigate = function(fragment, options) {
+		options = options || {trigger: true};
+		Backbone.history.navigate(fragment, options);
 	};
 
 	//load phonegap js
