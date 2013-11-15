@@ -46,6 +46,7 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
             request: null,
 
             initialize: function() {
+                this.requestParams = {};
                 var me = this;
                 //获取传入参数
                 if (arguments && arguments.length > 0) {
