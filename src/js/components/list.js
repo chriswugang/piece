@@ -441,10 +441,13 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                 this.loadListByJSONArray(listSoreData, true);
                 var scrollY = Store.loadObject(CACHE_ID + "-scrollY");
                 // this.iScroll.scrollTo(0, scrollY);
-                $(this.iScroll.scroller).css({
-                    "-webkit-transform": "translate(0px, " + scrollY + "px)",
-                    "transform": "translate(0px, " + scrollY + "px)"
-                });
+                if (listSoreData) {
+                    $(this.iScroll.scroller).css({
+                        "-webkit-transform": "translate(0px, " + scrollY + "px)",
+                        "transform": "translate(0px, " + scrollY + "px)"
+                    });
+                }
+
                 this.resetPullDownPos(scrollY);
                 this.iScroll.refresh();
             },
