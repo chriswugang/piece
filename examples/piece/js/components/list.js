@@ -319,6 +319,8 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
 
                     skarry = me.config['searchkeys'].split(",");
                 }
+                
+                var listItemContent = document.createDocumentFragment();
                 for (var i = 0; i < jsonArray.length; i++) {
                     var item = jsonArray[i];
 
@@ -354,10 +356,12 @@ define(['zepto', 'underscore', 'components/loader', 'components/cache', 'compone
                     }
 
                     if (_itemTemplateName) li.append(_.template(templateStr, item));
-                    //TODO: 需要重构
-                    li.appendTo(me.el.querySelector('.contentScroller'));
+
+                    listItemContent.appendChild(li[0]);
 
                 }
+
+                me.el.querySelector('.contentScroller').appendChild(listItemContent);
 
                 //更多按钮
                 var moreEl = this.el.querySelector('.cube-list-item-more');
