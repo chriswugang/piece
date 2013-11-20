@@ -148,6 +148,10 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 					// } else {
 					// 	me.delegate.changePage(viewInstance, module);
 					// }
+					
+					if (loader !== undefined) {
+						loader.hide();
+					}
 
 					if (viewInstance.type == 'portal') {
 						viewInstance.render();
@@ -155,11 +159,6 @@ define(['require', 'underscore', 'backbone', 'core/mainview', 'components/loader
 					} else {
 						//只是采用changePage
 						me.delegate.changePage(viewInstance, module);
-					}
-
-
-					if (loader !== undefined) {
-						loader.hide();
 					}
 					// console.info(me.urls);
 				}
