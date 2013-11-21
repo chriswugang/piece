@@ -205,3 +205,44 @@
 
     -webkit-box-shadow: -1px -1px 1px #000000;
 }
+
+
+.ui-calendar-header{
+  background-color: rgb(40,94,192) !important;
+  position: relative;
+  width:80%;
+  margin: auto;
+  top:40px;
+  padding: 0px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  -moz-box-shadow: 0px 10px 18px #555;
+  -webkit-box-shadow: 0px 10px 18px #555;
+  box-shadow: 0px 10px 18px #555;
+}
+
+.ui-calendar-calendar td.ui-calendar-current-day{
+  background-color: rgb(40,94,192) !important;
+}
+
+.ui-calendar-calendar{
+  position: relative;
+  width:80%;
+  margin: auto;
+  top:40px;
+}
+
+.ui-calendar{
+  background-color: rgba(0,0,0,0.5) !important;
+}
+
+ @media all and (max-width: 400px) {  
+      .ui-calendar-year{  
+        margin-right: 10px !important;
+      }  
+      .ui-calendar-title select{
+        padding: 2px !important;
+      }
+
+
+}
