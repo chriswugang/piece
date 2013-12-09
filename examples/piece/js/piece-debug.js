@@ -2158,7 +2158,7 @@ requirejs.config({
 	//delegate to backbone history navigate
 	window.Navigation.backboneNavigate = function(fragment, options) {
 		options = options || {trigger: true};
-		Backbone.history.navigate(fragment, options);
+		Backbone.history.navigate(fragment, opti ons);
 	};
 
 	//load phonegap js
